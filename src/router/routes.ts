@@ -33,6 +33,24 @@ const routes: RouteRecordRaw[] = [
     ]
   },
   {
+    path: '/',
+    component: () => import('@/layouts/BasicLayout.vue'),
+    children: [
+      {
+        path: '/problem/add',
+        meta: { title: '创建题目', requiredAuth: AuthEnum.USER },
+        component: () => import('@/views/ProblemEditView.vue'),
+        props: () => ({ type: 'add' })
+      },
+      {
+        path: '/problem/edit/:id(\\d+)',
+        meta: { title: '编辑题目', requiredAuth: AuthEnum.USER },
+        component: () => import('@/views/ProblemEditView.vue'),
+        props: (route) => ({ type: 'edit', id: route.params.id })
+      }
+    ]
+  },
+  {
     path: '/login',
     meta: { title: '登录' },
     component: () => import('@/views/LoginView.vue')
