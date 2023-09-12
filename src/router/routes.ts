@@ -37,6 +37,12 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/layouts/BasicLayout.vue'),
     children: [
       {
+        path: '/problem/:id(\\d+)',
+        meta: { title: '浏览题目' },
+        component: () => import('@/views/ProblemView.vue'),
+        props: (route) => ({ id: route.params.id })
+      },
+      {
         path: '/problem/add',
         meta: { title: '创建题目', requiredAuth: AuthEnum.USER },
         component: () => import('@/views/ProblemEditView.vue'),
