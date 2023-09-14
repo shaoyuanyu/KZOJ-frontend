@@ -26,6 +26,11 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/views/ProblemAllView.vue')
       },
       {
+        path: '/submission/mine',
+        meta: { title: '提交记录', requiredAuth: AuthEnum.USER },
+        component: () => import('@/views/SubmissionMineView.vue')
+      },
+      {
         path: '/problem/manage',
         meta: { title: '题目管理', requiredAuth: AuthEnum.USER },
         component: () => import('@/views/ProblemManageView.vue')
@@ -53,6 +58,12 @@ const routes: RouteRecordRaw[] = [
         meta: { title: '编辑题目', requiredAuth: AuthEnum.USER },
         component: () => import('@/views/ProblemEditView.vue'),
         props: (route) => ({ type: 'edit', id: route.params.id })
+      },
+      {
+        path: '/submission/:id(\\d+)',
+        meta: { title: '提交详情', requiredAuth: AuthEnum.USER },
+        component: () => import('@/views/SubmissionView.vue'),
+        props: (route) => ({ id: route.params.id })
       }
     ]
   },

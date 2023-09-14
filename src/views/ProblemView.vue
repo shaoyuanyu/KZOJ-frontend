@@ -3,6 +3,7 @@ import { queryProblemVOById } from '@/api/problem'
 import { doSubmit, queryStatusById } from '@/api/submission'
 import CodeEditor from '@/components/CodeEditor.vue'
 import MarkdownViewer from '@/components/MarkdownViewer.vue'
+import SubmissionsPanel from '@/components/SubmissionsPanel.vue'
 import type { JudgeConfig, Problem } from '@/models/problem'
 import type { SubmissionAdd } from '@/models/submission'
 import type { DescData } from '@arco-design/web-vue'
@@ -109,7 +110,9 @@ const onSubmitCode = () => {
             </a-collapse>
           </a-tab-pane>
           <a-tab-pane key="2" disabled title="评论" />
-          <a-tab-pane key="3" title="提交记录" />
+          <a-tab-pane key="3" title="提交记录">
+            <submissions-panel :problem-id="props.id" style="margin: 16px" type="problem" />
+          </a-tab-pane>
         </a-tabs>
       </template>
       <template #second>
