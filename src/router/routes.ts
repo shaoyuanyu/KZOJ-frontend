@@ -12,14 +12,9 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'nav',
-    redirect: '/index',
+    redirect: '/problem/all',
     component: () => import('@/layouts/BasicLayout.vue'),
     children: [
-      {
-        path: '/index',
-        meta: { title: '主页' },
-        component: () => import('@/views/IndexView.vue')
-      },
       {
         path: '/problem/all',
         meta: { title: '题库' },
