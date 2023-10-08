@@ -53,6 +53,7 @@ const onLogout = () => {
           </a-menu-item>
         </a-menu>
       </a-col>
+
       <!-- 右侧信息 -->
       <a-col flex="64px">
         <!-- 用户头像 (已登录) -->
@@ -65,7 +66,9 @@ const onLogout = () => {
               </template>
               个人主页
             </a-button>
+
             <a-divider margin="8px" />
+
             <a-button long size="large" status="danger" @click="onLogout">
               <template #icon>
                 <icon-export />
@@ -73,6 +76,7 @@ const onLogout = () => {
               退出登录
             </a-button>
           </template>
+
           <!-- 头像展示 -->
           <a-avatar style="cursor: pointer">
             <img
@@ -84,6 +88,7 @@ const onLogout = () => {
             <icon-user v-else />
           </a-avatar>
         </a-popover>
+
         <!-- 用户头像 (未登录) -->
         <a-tooltip v-else content="未登录" mini>
           <a-avatar
