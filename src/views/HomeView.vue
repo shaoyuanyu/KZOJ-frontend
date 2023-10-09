@@ -1,34 +1,38 @@
 <script setup lang="ts">
 import WelcomeCard from '@/components/home/WelcomeCard.vue'
+import NoticeCard from '@/components/home/NoticeCard.vue'
+import UserRankCard from '@/components/home/UserRankCard.vue'
 </script>
 
 <template>
   <div>
-
-    <a-row class="grid">
+    <a-row class="grid" :gutter="5">
       <a-col :span="12">
-        <WelcomeCard />
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+          "
+        >
+          <WelcomeCard style="height: 290px; margin-bottom: 5px" />
+          <NoticeCard style="height: 290px" />
+        </div>
       </a-col>
 
       <a-col :span="12">
-        <div>24 - 100%</div>
+        <UserRankCard style="height: 605px" />
       </a-col>
     </a-row>
-
   </div>
 </template>
 
 <style scoped>
 .grid .arco-col {
-  height: 300px;
+  height: 625px;
   /*line-height: 48px;*/
   color: var(--color-white);
   text-align: center;
-}
-.grid .arco-col:nth-child(2n) {
-  /*background-color: rgba(var(--arcoblue-6), 0.9);*/
-}
-.grid .arco-col:nth-child(2n + 1) {
-  /* background-color: var(--color-primary-light-4); */
 }
 </style>

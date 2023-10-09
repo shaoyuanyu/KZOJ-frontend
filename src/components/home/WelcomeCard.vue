@@ -1,11 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const images = ref([
-  'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/cd7a1aaea8e1c5e3d26fe2591e561798.png~tplv-uwbnlip3yd-webp.webp',
-  'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/6480dbc69be1b5de95010289787d64f1.png~tplv-uwbnlip3yd-webp.webp',
-  'https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/0265a04fddbd77a19602a15d9d55d797.png~tplv-uwbnlip3yd-webp.webp'
-])
+const images = ref(['/kz_pic/01.jpg', '/kz_pic/02.jpg', '/kz_pic/03.jpg'])
 </script>
 
 <template>
@@ -19,7 +15,7 @@ const images = ref([
       :auto-play="true"
     >
       <a-carousel-item v-for="(image, key) in images" :key="key">
-        <img :src="image" />
+        <img :src="image" class="display-image" />
       </a-carousel-item>
     </a-carousel>
 
@@ -31,11 +27,23 @@ const images = ref([
 .welcome-card {
   width: 100%;
   height: 100%;
-  padding: 5px 0;
+
+  padding: 10px 0;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   background-color: aliceblue;
+  border-radius: 10px;
+  box-shadow:
+    0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.display-image {
+  max-width: 100%;
+  max-height: 100%;
 }
 </style>
