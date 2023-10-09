@@ -1,7 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center;">
+  <div
+    style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center"
+  >
     <a-card hoverable :style="{ width: '560px' }">
       <template #cover>
         <img src="/kz_logo.png" />
@@ -15,6 +17,5 @@
         </template>
       </a-card-meta>
     </a-card>
-    
   </div>
 </template>
