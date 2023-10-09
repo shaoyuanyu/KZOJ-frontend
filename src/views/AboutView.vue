@@ -1,13 +1,6 @@
 <template>
-<<<<<<< HEAD
-  <div
-    style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center"
-  >
-    <a-card hoverable :style="{ width: '560px' }">
-=======
   <div class="container">
     <a-card hoverable class="card">
->>>>>>> 71ff87c791a7b16569e26f1597b8cbf9e08013e5
       <template #cover>
         <div class="gradient-background">
           <img src="/kz_logo.png" style="width: 200px; margin: 0 auto;" />
