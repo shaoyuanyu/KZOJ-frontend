@@ -35,7 +35,7 @@ const images = ref(['/kz_pic/01.jpg', '/kz_pic/02.jpg', '/kz_pic/03.jpg'])
   justify-content: center;
   align-items: center;
 
-  background-color: aliceblue;
+  background-color: white;
   border-radius: 10px;
   box-shadow:
     0 4px 8px 0 rgba(0, 0, 0, 0.2),

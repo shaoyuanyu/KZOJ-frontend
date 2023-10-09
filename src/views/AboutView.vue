@@ -3,13 +3,13 @@
     <a-card hoverable class="card">
       <template #cover>
         <div class="gradient-background">
-          <img src="/kz_logo.png" style="width: 200px; margin: 0 auto;" />
+          <img src="/kz_logo.png" style="width: 200px; margin: 0 auto" />
         </div>
       </template>
       <a-card-meta>
         <template #description>
-          <div style="text-align: center;">
-            <a href="https://github.com/shaoyuanyu/KZOJ-frontend">KZOJ</a> 
+          <div style="text-align: center">
+            <a href="https://github.com/shaoyuanyu/KZOJ-frontend">KZOJ</a>
             <div>Forked From</div>
             <a href="https://github.com/DXMY-Fs/MOJ-frontend">MOJ</a>
             <div>团队功能开发贡献者 / （后期添加）</div>

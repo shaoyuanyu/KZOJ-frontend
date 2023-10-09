@@ -2,6 +2,8 @@
 import WelcomeCard from '@/components/home/WelcomeCard.vue'
 import NoticeCard from '@/components/home/NoticeCard.vue'
 import UserRankCard from '@/components/home/UserRankCard.vue'
+import StatisticsCard from '@/components/home/StatisticsCard.vue'
+import NewProblemCard from '@/components/home/NewProblemCard.vue'
 </script>
 
 <template>
@@ -25,12 +27,23 @@ import UserRankCard from '@/components/home/UserRankCard.vue'
         <UserRankCard style="height: 605px" />
       </a-col>
     </a-row>
+
+    <a-row class="grid" :gutter="5">
+      <a-col :span="12">
+        <StatisticsCard style="height: 600px" />
+      </a-col>
+
+      <a-col :span="12">
+        <NewProblemCard style="height: 600px" />
+      </a-col>
+    </a-row>
   </div>
 </template>
 
 <style scoped>
 .grid .arco-col {
   height: 625px;
+  margin-bottom: 10px;
   /*line-height: 48px;*/
   color: var(--color-white);
   text-align: center;

@@ -4,7 +4,7 @@ import { ref } from 'vue'
 const rankList = ref([
   { key: '1', userName: '王书豪', score: 100 },
   { key: '2', userName: '书豪王', score: 90 },
-  { key: '3', userName: '豪王书', score: 80 },
+  { key: '3', userName: '豪王书', score: 80 }
 ])
 </script>
 
@@ -40,7 +40,7 @@ const rankList = ref([
   flex-direction: column;
   align-items: center;
 
-  background-color: aliceblue;
+  background-color: white;
   border-radius: 10px;
   box-shadow:
     0 4px 8px 0 rgba(0, 0, 0, 0.2),
