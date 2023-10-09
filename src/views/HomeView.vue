@@ -7,8 +7,8 @@ import NewProblemCard from '@/components/home/NewProblemCard.vue'
 </script>
 
 <template>
-  <div>
-    <a-row class="grid" :gutter="5">
+  <div class="home-view">
+    <a-row class="grid" :gutter="20">
       <a-col :span="12">
         <div
           style="
@@ -28,7 +28,7 @@ import NewProblemCard from '@/components/home/NewProblemCard.vue'
       </a-col>
     </a-row>
 
-    <a-row class="grid" :gutter="5">
+    <a-row class="grid" :gutter="20">
       <a-col :span="12">
         <StatisticsCard style="height: 600px" />
       </a-col>
@@ -41,9 +41,13 @@ import NewProblemCard from '@/components/home/NewProblemCard.vue'
 </template>
 
 <style scoped>
+.home-view {
+  margin: 5px 5px;
+}
+
 .grid .arco-col {
   height: 625px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   /*line-height: 48px;*/
   color: var(--color-white);
   text-align: center;

@@ -95,7 +95,7 @@ const option = ref({
 </script>
 
 <template>
-  <div class="user-rank-card">
+  <div class="statistics-card">
     <h1 style="color: blueviolet">提交统计</h1>
 
     <v-chart
@@ -108,7 +108,7 @@ const option = ref({
 </template>
 
 <style scoped>
-.user-rank-card {
+.statistics-card {
   width: 100%;
   height: 100%;
 
