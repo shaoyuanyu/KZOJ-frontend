@@ -29,7 +29,7 @@ const newProblemList = ref([
 <style scoped>
 .user-rank-card {
   width: 100%;
-  height: 100%;
+  height: calc(100% - 20px);
 
   padding: 10px 0;
 

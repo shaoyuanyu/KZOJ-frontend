@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const images = ref(['/kz_pic/01.jpg', '/kz_pic/02.jpg', '/kz_pic/03.jpg'])
+const images = ref(['/kz_pic/02.jpg', '/kz_pic/01.jpg', '/kz_pic/03.jpg'])
 </script>
 
 <template>
@@ -19,14 +19,14 @@ const images = ref(['/kz_pic/01.jpg', '/kz_pic/02.jpg', '/kz_pic/03.jpg'])
       </a-carousel-item>
     </a-carousel>
 
-    <h1 style="color: blueviolet">欢迎访问KZOJ</h1>
+    <h1 style="color: blueviolet">欢迎访问KZOJ &nbsp; : )</h1>
   </div>
 </template>
 
 <style scoped>
 .welcome-card {
   width: 100%;
-  height: 100%;
+  height: calc(100% - 20px);
 
   padding: 10px 0;
 

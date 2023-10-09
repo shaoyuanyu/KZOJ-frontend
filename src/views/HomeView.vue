@@ -18,23 +18,23 @@ import NewProblemCard from '@/components/home/NewProblemCard.vue'
             align-items: center;
           "
         >
-          <WelcomeCard style="height: 290px; margin-bottom: 5px" />
-          <NoticeCard style="height: 290px" />
+          <div style="width: 100%; height: 300px; margin-bottom: 10px"><WelcomeCard /></div>
+          <div style="width: 100%; height: 290px"><NoticeCard /></div>
         </div>
       </a-col>
 
       <a-col :span="12">
-        <UserRankCard style="height: 605px" />
+        <div style="width: 100%; height: 600px"><UserRankCard /></div>
       </a-col>
     </a-row>
 
     <a-row class="grid" :gutter="20">
       <a-col :span="12">
-        <StatisticsCard style="height: 600px" />
+        <div style="width: 100%; height: 400px"><StatisticsCard /></div>
       </a-col>
 
       <a-col :span="12">
-        <NewProblemCard style="height: 600px" />
+        <div style="width: 100%; height: 400px"><NewProblemCard /></div>
       </a-col>
     </a-row>
   </div>
@@ -46,8 +46,7 @@ import NewProblemCard from '@/components/home/NewProblemCard.vue'
 }
 
 .grid .arco-col {
-  height: 625px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   /*line-height: 48px;*/
   color: var(--color-white);
   text-align: center;
