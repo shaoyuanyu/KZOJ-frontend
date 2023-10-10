@@ -8,9 +8,7 @@ const mode = ref(false)
 <template>
   <div id="submission">
     <a-card class="card" title="我的提交记录">
-      <span>
-        全部 <a-switch v-model="mode" type="line" /> 我的
-      </span>
+      <span> 全部 <a-switch v-model="mode" type="line" /> 我的 </span>
       <br /><br />
 
       <div v-if="mode">
@@ -19,7 +17,6 @@ const mode = ref(false)
       <div v-else>
         <submissions-panel type="all" />
       </div>
-      
     </a-card>
   </div>
 </template>

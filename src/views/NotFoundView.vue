@@ -52,7 +52,7 @@ loop1 = setInterval(() => {
 </script>
 
 <template>
-  <el-card shadow>
+  <a-card shadow>
     <div class="error">
       <div class="container-floud">
         <div style="text-align: center">
@@ -97,7 +97,7 @@ loop1 = setInterval(() => {
         </div>
       </div>
     </div>
-  </el-card>
+  </a-card>
 </template>
 
 <style scoped>

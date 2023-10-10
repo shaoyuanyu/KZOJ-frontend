@@ -3,9 +3,15 @@ import { Message } from '@arco-design/web-vue'
 import axios from 'axios'
 
 // 创建 Axios 对象
+/*
 const $axios = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL, // 公共 URL
   timeout: import.meta.env.VITE_API_TIMEOUT // 超时时间
+})
+*/
+const $axios = axios.create({
+  baseURL: 'http://127.0.0.1:8081', // 公共 URL
+  timeout: 3000 // 超时时间
 })
 
 // 配置请求拦截器
@@ -51,7 +57,10 @@ $axios.interceptors.response.use(
       router.push('/').then()
     } else if (error.response.status === 500) {
       Message.error('系统未知异常')
-    }
+    }/* else if (error.response.status === 404) {
+      Message.error('page not found')
+      router.push('/404').then()
+    }*/
     return Promise.reject(error)
   }
 )

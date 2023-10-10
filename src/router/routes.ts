@@ -96,13 +96,24 @@ const routes: RouteRecordRaw[] = [
         meta: { title: '提交详情-test' },
         component: () => import('@/views/SubmissionView.vue'),
         props: () => ({ id: 0 })
-      },
+      }
     ]
   },
   {
     path: '/login',
     meta: { title: '登录' },
     component: () => import('@/views/LoginView.vue')
+  },
+  {
+    path: '/',
+    component: () => import('@/layouts/BasicLayout.vue'),
+    children: [
+      {
+        path: '/404',
+        meta: { title: 'Error' },
+        component: () => import('@/views/NotFoundView.vue')
+      }
+    ]
   }
 ]
 
