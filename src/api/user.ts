@@ -38,7 +38,7 @@ export function updateAccountAvatar(file: File) {
 }
 
 // 通过id查询账号
-// /user/account/
+// /user/account/{id}
 export function queryAccountById(id: string) {
   return $axios.get<RespObj<User>>('/user/account/' + id)
 }
