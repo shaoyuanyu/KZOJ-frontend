@@ -7,7 +7,7 @@ import {
   ToolboxComponent,
   TooltipComponent,
   GridComponent,
-  LegendComponent,
+  LegendComponent
 } from 'echarts/components'
 import { LineChart } from 'echarts/charts'
 import { UniversalTransition } from 'echarts/features'
@@ -63,9 +63,7 @@ const option = ref({
       type: 'value'
     }
   ],
-  color: [
-    '#84DAFF', '#25F145'
-  ],
+  color: ['#84DAFF', '#25F145'],
   series: [
     {
       name: '提交量',
@@ -88,8 +86,7 @@ const option = ref({
         focus: 'series'
       },
       data: commitStatistics.value.accept
-    },
-    
+    }
   ]
 })
 </script>
@@ -98,12 +95,7 @@ const option = ref({
   <div class="statistics-card">
     <h1 style="color: blueviolet">提交统计</h1>
 
-    <v-chart
-      class="chart"
-      :option="option"
-      autoresize
-    />
-
+    <v-chart class="chart" :option="option" autoresize />
   </div>
 </template>
 

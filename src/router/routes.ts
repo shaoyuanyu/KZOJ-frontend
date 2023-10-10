@@ -21,7 +21,7 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/views/HomeView.vue')
       },
       {
-        path: '/problem/all',
+        path: '/problems/all',
         meta: { title: '题库' },
         component: () => import('@/views/ProblemAllView.vue')
       },
@@ -36,9 +36,9 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/views/NotFoundView.vue')
       },
       {
-        path: '/exam',
-        meta: { title: '测评' },
-        component: () => import('@/views/NotFoundView.vue')
+        path: '/submission/record',
+        meta: { title: '提交记录' /*requiredAuth: AuthEnum.USER*/ },
+        component: () => import('@/views/SubmissionRecordView.vue')
       },
       {
         path: '/ranking',
@@ -46,12 +46,7 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/views/NotFoundView.vue')
       },
       {
-        path: '/submission/mine',
-        meta: { title: '提交记录' /*requiredAuth: AuthEnum.USER*/ },
-        component: () => import('@/views/SubmissionMineView.vue')
-      },
-      {
-        path: '/problem/manage',
+        path: '/problems/manage',
         meta: { title: '题目管理' /*requiredAuth: AuthEnum.USER*/ },
         component: () => import('@/views/ProblemManageView.vue')
       },
@@ -73,6 +68,12 @@ const routes: RouteRecordRaw[] = [
         props: (route) => ({ id: route.params.id })
       },
       {
+        path: '/problem/test',
+        meta: { title: '浏览题目-test' },
+        component: () => import('@/views/ProblemView.vue'),
+        props: () => ({ id: 0 })
+      },
+      {
         path: '/problem/add',
         meta: { title: '创建题目' /*requiredAuth: AuthEnum.USER*/ },
         component: () => import('@/views/ProblemEditView.vue'),
@@ -89,7 +90,13 @@ const routes: RouteRecordRaw[] = [
         meta: { title: '提交详情' /*requiredAuth: AuthEnum.USER*/ },
         component: () => import('@/views/SubmissionView.vue'),
         props: (route) => ({ id: route.params.id })
-      }
+      },
+      {
+        path: '/submission/test',
+        meta: { title: '提交详情-test' },
+        component: () => import('@/views/SubmissionView.vue'),
+        props: () => ({ id: 0 })
+      },
     ]
   },
   {

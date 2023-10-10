@@ -4,7 +4,7 @@ import { ref } from 'vue'
 const newProblemList = ref([
   { id: 'P2553', title: '题目3', updateTime: '2023/10/9' },
   { id: 'P2552', title: '题目2', updateTime: '2023/10/9' },
-  { id: 'P2551', title: '题目1', updateTime: '2023/10/9' },
+  { id: 'P2551', title: '题目1', updateTime: '2023/10/9' }
 ])
 </script>
 
@@ -18,7 +18,12 @@ const newProblemList = ref([
       <a-col :span="8">更新时间</a-col>
     </a-row>
 
-    <a-row class="ranking-table" :gutter="5" v-for="(problemItem, key) in newProblemList" :key="key">
+    <a-row
+      class="ranking-table"
+      :gutter="5"
+      v-for="(problemItem, key) in newProblemList"
+      :key="key"
+    >
       <a-col :span="4">{{ problemItem.id }}</a-col>
       <a-col :span="12">{{ problemItem.title }}</a-col>
       <a-col :span="8">{{ problemItem.updateTime }}</a-col>
