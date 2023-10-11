@@ -1,57 +1,46 @@
 import type { User } from '@/models/user'
 
 export interface Problem {
-  /**
-   * ID
-   */
+  // ID
   id: string
-  /**
-   * 创建者
-   */
+
+  // 创建者
   creator: User
-  /**
-   * 题目名称
-   */
+
+  // 题目名称
   title: string
-  /**
-   * 题目描述
-   */
+
+  // 题目描述
   content: string
-  /**
-   * 备注
-   */
+
+  // 备注
   remark: string
-  /**
-   * 标签
-   */
+
+  // 标签
   tags: string[]
-  /**
-   * 提交数
-   */
+
+  // 提交数
   submitCount: number
-  /**
-   * 通过数
-   */
+
+  // 通过数
   acceptedCount: number
-  /**
-   * 评测配置
-   */
-  judgeConfig: JudgeConfig
-  /**
-   * 评测用例
-   */
+
+  // 评测配置
+  judgeConfig: JudgeConfig[]
+
+  // 评测用例
   judgeCases: JudgeCase[]
-  /**
-   * 参考答案
-   */
+
+  // 参考答案
   refAnswer: string
-  /**
-   * 创建时间
-   */
+
+  // 创建时间
   createTime: string
 }
 
 export interface JudgeConfig {
+  // 语言
+  language: string
   /**
    * 时间限制 (ms)
    */
