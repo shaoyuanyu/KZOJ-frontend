@@ -1,24 +1,28 @@
 <template>
     <div class="card">
-      <h2>搜索训练</h2>
-      <input type="text" placeholder="搜索训练">
-      <div>
-        <label for="permissions">训练权限:</label>
-        <select id="permissions">
-          <option value="public">公开训练</option>
-          <option value="private">私有训练</option>
-          <!-- 后期添加 -->
-        </select>
-      </div>
-      <div>
-        <label for="categories">训练分类:</label>
-        <select id="categories">
-          <option value="data-structures">数据结构</option>
-          <option value="advanced-algorithms">高级算法</option>
-          <!-- 后期添加 -->
-        </select>
-      </div>
+    <h2>搜索训练</h2>
+    <div class="search-container">
+      <a-input-search :style="{width:'320px'}" placeholder="输入关键词" search-button/>
     </div>
+    <div>
+      <h3>训练权限</h3>
+      <a-space>
+      <a-button type="primary">全部</a-button>
+      <a-button>公开训练</a-button>
+      <a-button>私有训练</a-button>
+      
+  </a-space>
+    </div>
+    <div>
+      <h3>训练分类</h3>
+      <a-button>高级数据结构</a-button>
+      <a-button>高级算法</a-button>
+      <a-button>高级数学及其他</a-button>
+      <a-button>图论算法</a-button>
+      <a-button>高级动态规划</a-button>
+      <a-button>CSP-J</a-button>
+    </div>
+  </div>
   </template>
   
   <script>
