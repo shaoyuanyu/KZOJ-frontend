@@ -57,7 +57,7 @@ $axios.interceptors.response.use(
       router.push('/').then()
     } else if (error.response.status === 500) {
       Message.error('系统未知异常')
-    }/* else if (error.response.status === 404) {
+    } /* else if (error.response.status === 404) {
       Message.error('page not found')
       router.push('/404').then()
     }*/

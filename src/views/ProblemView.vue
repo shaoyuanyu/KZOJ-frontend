@@ -1,22 +1,40 @@
 <script lang="ts" setup>
-import { queryProblemVOById } from '@/api/problem'
-import { doSubmit, queryStatusById } from '@/api/submission'
-import CodeEditor from '@/components/CodeEditor.vue'
-import MarkdownViewer from '@/components/MarkdownViewer.vue'
-import SubmissionsPanel from '@/components/submission_record/SubmissionsPanel.vue'
-import type { JudgeConfig, Problem } from '@/models/problem'
-import type { SubmissionAdd } from '@/models/submission'
 import type { DescData } from '@arco-design/web-vue'
 import { Notification } from '@arco-design/web-vue'
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+// components
+import CodeEditor from '@/components/CodeEditor.vue'
+import MarkdownViewer from '@/components/MarkdownViewer.vue'
+import SubmissionsPanel from '@/components/submission_record/SubmissionsPanel.vue'
+// api
+import { queryProblemVOById } from '@/api/problem'
+import { doSubmit, queryStatusById } from '@/api/submission'
+// models
+import type { JudgeConfig, Problem } from '@/models/problem'
+import type { SubmissionAdd } from '@/models/submission'
 
 const props = defineProps<{ id: string }>()
 
 const router = useRouter()
 
 const size = ref(0.5)
-const problem = ref({ judgeConfig: {} as JudgeConfig } as Problem)
+//const problem = ref({ judgeConfig: {} as JudgeConfig } as Problem)
+const problem = ref<Problem>({
+  id: "",
+  creator: { id: "", userName: "", avatarUrl: "", email: "", auth: -1 },
+  title: "",
+  content: "",
+  remark: "",
+  tags: [ "" ],
+  submitCount: 0,
+  acceptedCount: 0,
+  judgeConfig: [ { language: "", timeLimit: 0.0, memoryLimit: 0.0 } ],
+  judgeCases: [ { caseIn: "", caseOut: "" } ],
+  exampleCases: [ { caseIn: "", caseOut: "" } ],
+  refAnswer: "",
+  createTime: ""
+})
 const basicInfo = ref<DescData[]>([])
 const submissionAdd = ref<SubmissionAdd>({ problemId: props.id } as SubmissionAdd)
 
@@ -45,6 +63,8 @@ onMounted(() => {
   console.log(props.id)
   queryProblemVOById(props.id).then((res) => {
     console.log(res.data)
+    problem.value = res.data
+    console.log(problem.value)
   })
 })
 
@@ -93,34 +113,54 @@ const onSubmitCode = () => {
   <div id="problem">
     <a-split v-model:size="size" :max="0.7" :min="0.3" class="box">
       <template #first>
-        <a-tabs animation default-active-key="1" lazy-load size="large">
-          <a-tab-pane key="1" title="浏览题目">
-            <markdown-viewer :text="problem.content" />
-            <a-descriptions
-              :column="5"
-              :data="basicInfo"
-              layout="inline-vertical"
-              style="margin: 0 32px 16px"
-            />
-            <a-collapse :bordered="false">
-              <a-collapse-item key="1" header="题目标签">
-                <a-space>
-                  <a-tag v-for="tag in problem.tags" :key="tag" color="arcoblue" size="large">
-                    {{ tag }}
-                  </a-tag>
-                </a-space>
-              </a-collapse-item>
-              <a-collapse-item key="2" header="参考答案">
-                <code-editor :code="problem.refAnswer" disabled />
-              </a-collapse-item>
-            </a-collapse>
-          </a-tab-pane>
-          <a-tab-pane key="2" disabled title="评论" />
-          <a-tab-pane key="3" title="提交记录">
-            <submissions-panel :problem-id="props.id" style="margin: 16px" type="problem" />
-          </a-tab-pane>
-        </a-tabs>
+        <div style="height: 100%; overflow-y: hidden;">
+          <a-page-header
+            :style="{ background: 'var(--color-bg-2)' }"
+            :title="problem.title"
+            :subtitle="problem.id"
+            :show-back="false"
+          >
+            <template #breadcrumb>
+              <a-breadcrumb>
+                <a-breadcrumb-item>题库</a-breadcrumb-item>
+                <a-breadcrumb-item>分类</a-breadcrumb-item>
+              </a-breadcrumb>
+            </template>
+          </a-page-header>
+
+          <a-tabs animation default-active-key="1" lazy-load size="large">
+            <a-tab-pane key="1" title="浏览题目">
+              <markdown-viewer :text="problem.content" />
+              <a-descriptions
+                :column="5"
+                :data="basicInfo"
+                layout="inline-vertical"
+                style="margin: 0 32px 16px"
+              />
+
+              <a-collapse :bordered="false">
+                <a-collapse-item key="1" header="题目标签">
+                  <a-space>
+                    <a-tag v-for="tag in problem.tags" :key="tag" color="arcoblue" size="large">
+                      {{ tag }}
+                    </a-tag>
+                  </a-space>
+                </a-collapse-item>
+                <a-collapse-item key="2" header="参考答案">
+                  <code-editor :code="problem.refAnswer" disabled />
+                </a-collapse-item>
+              </a-collapse>
+            </a-tab-pane>
+
+            <a-tab-pane key="2" disabled title="评论" />
+
+            <a-tab-pane key="3" title="提交记录">
+              <submissions-panel :problem-id="props.id" style="margin: 16px" type="problem" />
+            </a-tab-pane>
+          </a-tabs>
+        </div>
       </template>
+
       <template #second>
         <div class="right">
           <a-row :wrap="false" style="margin-bottom: 16px">

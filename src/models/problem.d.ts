@@ -31,6 +31,9 @@ export interface Problem {
   // 评测用例
   judgeCases: JudgeCase[]
 
+  // 样例
+  exampleCases: ExampleCase[]
+
   // 参考答案
   refAnswer: string
 
@@ -51,10 +54,18 @@ export interface JudgeConfig {
 
 export interface JudgeCase {
   // 用例输入
-  in: string
+  caseIn: string
 
   // 用例输出
-  out: string
+  caseOut: string
+}
+
+export interface ExampleCase {
+  // 用例输入
+  caseIn: string
+
+  // 用例输出
+  caseOut: string
 }
 
 export interface ProblemQuery {
@@ -69,7 +80,7 @@ export interface ProblemQuery {
 
   // 是否正序
   sortOrderASC: boolean
-  
+
   // ID
   id: string
 

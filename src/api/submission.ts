@@ -8,13 +8,13 @@ export function doSubmit(submissionAdd: SubmissionAdd) {
   return $axios.post<RespObj<Submission>>('/submission/submit', submissionAdd)
 }
 
-// 
+//
 // /submission/{id}
 export function querySubmissionVOById(id: string) {
   return $axios.get<RespObj<Submission>>('/submission/' + id)
 }
 
-// 
+//
 // /submission/page
 export function queryRecordVOWithPagination(submissionQuery: SubmissionQuery) {
   return $axios.get<RespPage<Submission>>('/submission/page', { params: submissionQuery })

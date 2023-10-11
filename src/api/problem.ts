@@ -20,19 +20,20 @@ export function editProblem(problem: Problem) {
   return $axios.put<RespStr>('/problem/edit', problem)
 }
 
-// 
+//
 // /problem/{id}
 export function queryProblemVOById(id: string) {
-  return $axios.get<RespObj<Problem>>('/problem/' + id)
+  //return $axios.get<RespObj<Problem>>('/problem/' + id)
+  return $axios.get<Problem>('/problem/' + id)
 }
 
-// 
+//
 // /problem/page
 export function queryRecordVOWithPagination(problemQuery: ProblemQuery) {
   return $axios.get<RespPage<Problem>>('/problem/page', { params: problemQuery })
 }
 
-// 
+//
 // /problem/mine/{id}
 export function queryMyProblemById(id: string) {
   return $axios.get<RespObj<Problem>>('/problem/mine/' + id)

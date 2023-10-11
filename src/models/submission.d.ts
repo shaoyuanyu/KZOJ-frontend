@@ -82,7 +82,7 @@ export interface SubmissionQuery {
 
   // 编程语言
   lang: number
-  
+
   // 提交状态
   status: number
 }
