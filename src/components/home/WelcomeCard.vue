@@ -7,14 +7,11 @@ const images = ref(['/kz_pic/02.jpg', '/kz_pic/01.jpg', '/kz_pic/03.jpg'])
 <template>
   <div class="welcome-card">
     <a-carousel
-      :style="{
-        width: '600px',
-        height: '240px'
-      }"
+      style="width: 100%; height: 100%;"
       :default-current="2"
       :auto-play="true"
     >
-      <a-carousel-item v-for="(image, key) in images" :key="key">
+      <a-carousel-item v-for="(image, key) in images" :key="key" style="display: flex; justify-content: center; align-items: center">
         <img :src="image" class="display-image" />
       </a-carousel-item>
     </a-carousel>
