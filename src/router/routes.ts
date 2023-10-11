@@ -28,12 +28,12 @@ const routes: RouteRecordRaw[] = [
       {
         path: '/train',
         meta: { title: '训练' },
-        component: () => import('@/views/NotFoundView.vue')
+        component: () => import('@/views/TrainView.vue')
       },
       {
         path: '/competition',
         meta: { title: '比赛' },
-        component: () => import('@/views/NotFoundView.vue')
+        component: () => import('@/views/CompetitionView.vue')
       },
       {
         path: '/submission/record',
