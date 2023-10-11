@@ -41,58 +41,44 @@ export interface Problem {
 export interface JudgeConfig {
   // 语言
   language: string
-  /**
-   * 时间限制 (ms)
-   */
+
+  // 时间限制 (ms)
   timeLimit: number
-  /**
-   * 内存限制 (MB)
-   */
+
+  // 内存限制 (MB)
   memoryLimit: number
 }
 
 export interface JudgeCase {
-  /**
-   * 用例输入
-   */
+  // 用例输入
   in: string
-  /**
-   * 用例输出
-   */
+
+  // 用例输出
   out: string
 }
 
 export interface ProblemQuery {
-  /**
-   * 当前页码
-   */
+  // 当前页码
   current: number
-  /**
-   * 页面大小
-   */
+
+  // 页面大小
   size: number
-  /**
-   * 排序字段
-   */
+
+  // 排序字段
   sortBy: string
-  /**
-   * 是否正序
-   */
+
+  // 是否正序
   sortOrderASC: boolean
-  /**
-   * ID
-   */
+  
+  // ID
   id: string
-  /**
-   * 创建者 ID
-   */
+
+  // 创建者 ID
   creatorId?: string
-  /**
-   * 题目名称
-   */
+
+  // 题目名称
   title: string
-  /**
-   * 标签
-   */
+
+  // 标签
   tag: string
 }

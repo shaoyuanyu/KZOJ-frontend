@@ -21,6 +21,7 @@ const basicInfo = ref<DescData[]>([])
 const submissionAdd = ref<SubmissionAdd>({ problemId: props.id } as SubmissionAdd)
 
 onMounted(() => {
+  /*
   queryProblemVOById(props.id).then((resp) => {
     const p = resp.data.data
     document.title = p.title
@@ -39,6 +40,11 @@ onMounted(() => {
             : `${((p.acceptedCount / p.submitCount) * 100).toFixed(1)} %`
       }
     ]
+  })
+  */
+  console.log(props.id)
+  queryProblemVOById(props.id).then((res) => {
+    console.log(res.data)
   })
 })
 

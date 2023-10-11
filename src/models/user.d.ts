@@ -5,13 +5,10 @@ export interface User {
   id: string
 
   // 用户名
-  username: string
+  userName: string
 
   // 头像URL
   avatarUrl: string
-
-  // 手机
-  phone: string
 
   // 邮箱
   email: string
