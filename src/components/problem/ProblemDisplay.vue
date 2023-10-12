@@ -26,12 +26,26 @@ const basicInfo = ref<DescData[]>([
 // 获取难度Tag的颜色
 function getLevelTagColor(level: string): string {
   switch (level) {
-    case "easy":
-      return "cyan"
-    case "medium":
+    case "1":
       return "arcoblue"
-    case "difficult":
+    case "2":
+      return "blue"
+    case "3":
+      return "cyan"
+    case "4":
+      return "green"
+    case "5":
+      return "lime"
+    case "6":
+      return "gold"
+    case "7":
+      return "orange"
+    case "8":
+      return "orangered"
+    case "9":
       return "magenta"
+    case "10":
+      return "red"
     default:
       return "gray"
   }
@@ -76,7 +90,7 @@ onMounted(() => {
       :show-back="false"
     >
       <template #subtitle>
-        <a-tag :color="getLevelTagColor(problem.difficultLevel)" bordered>{{ problem.difficultLevel }}</a-tag>
+        <a-tag :color="getLevelTagColor(problem.difficultLevel)" bordered>{{ problem.difficultLevel }}级</a-tag>
       </template>
 
       <template #breadcrumb>
