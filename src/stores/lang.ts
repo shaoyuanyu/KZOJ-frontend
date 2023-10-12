@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 export const useLangStore = defineStore('langStore', {
   state: () => ({
-    lang: "C"
+    lang: 'C'
   }),
   actions: {
     switchLang(lang: string) {

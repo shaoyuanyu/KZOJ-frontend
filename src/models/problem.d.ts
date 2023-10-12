@@ -44,13 +44,13 @@ export interface Problem {
   difficultLevel: string
 
   // 题目来源
-	source: string
+  source: string
 
   // 输入描述
-	inputDiscription: string
+  inputDiscription: string
 
   // 输出描述
-	outputDiscription: string
+  outputDiscription: string
 }
 
 export interface JudgeConfig {

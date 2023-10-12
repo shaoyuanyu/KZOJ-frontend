@@ -22,32 +22,31 @@ const basicInfo = ref<DescData[]>([
   { label: '通过率', value: '-' }
 ])
 
-
 // 获取难度Tag的颜色
 function getLevelTagColor(level: string): string {
   switch (level) {
-    case "1":
-      return "arcoblue"
-    case "2":
-      return "blue"
-    case "3":
-      return "cyan"
-    case "4":
-      return "green"
-    case "5":
-      return "lime"
-    case "6":
-      return "gold"
-    case "7":
-      return "orange"
-    case "8":
-      return "orangered"
-    case "9":
-      return "magenta"
-    case "10":
-      return "red"
+    case '1':
+      return 'arcoblue'
+    case '2':
+      return 'blue'
+    case '3':
+      return 'cyan'
+    case '4':
+      return 'green'
+    case '5':
+      return 'lime'
+    case '6':
+      return 'gold'
+    case '7':
+      return 'orange'
+    case '8':
+      return 'orangered'
+    case '9':
+      return 'magenta'
+    case '10':
+      return 'red'
     default:
-      return "gray"
+      return 'gray'
   }
 }
 
@@ -58,19 +57,22 @@ function updateBasicInfo(): void {
   var matched = false
 
   props.problem.judgeConfig.forEach((judgeConfig) => {
-    if ( judgeConfig.language == props.language || ( !matched && judgeConfig.language == "Others" ) ) {
+    if (judgeConfig.language == props.language || (!matched && judgeConfig.language == 'Others')) {
       matched = true
       timeLimit = judgeConfig.timeLimit
       memoryLimit = judgeConfig.memoryLimit
-      console.log("匹配到: ", judgeConfig.language)
+      console.log('匹配到: ', judgeConfig.language)
     }
   })
-  
-  basicInfo.value[0].value = timeLimit + " ms"
-  basicInfo.value[1].value = memoryLimit + " MB"
+
+  basicInfo.value[0].value = timeLimit + ' ms'
+  basicInfo.value[1].value = memoryLimit + ' MB'
   basicInfo.value[2].value = `${props.problem.submitCount}`
   basicInfo.value[3].value = `${props.problem.acceptedCount}`
-  basicInfo.value[4].value = props.problem.submitCount === 0 ? '暂无数据' : `${((props.problem.acceptedCount/props.problem.submitCount)*100).toFixed(1)} %`
+  basicInfo.value[4].value =
+    props.problem.submitCount === 0
+      ? '暂无数据'
+      : `${((props.problem.acceptedCount / props.problem.submitCount) * 100).toFixed(1)} %`
 }
 
 watch(props, () => {
@@ -90,7 +92,9 @@ onMounted(() => {
       :show-back="false"
     >
       <template #subtitle>
-        <a-tag :color="getLevelTagColor(problem.difficultLevel)" bordered>{{ problem.difficultLevel }}级</a-tag>
+        <a-tag :color="getLevelTagColor(problem.difficultLevel)" bordered
+          >{{ problem.difficultLevel }}级</a-tag
+        >
       </template>
 
       <template #breadcrumb>
@@ -110,15 +114,14 @@ onMounted(() => {
       style="height: 100%"
     >
       <a-tab-pane key="1" title="浏览题目">
-        
         <!-- 题目内容 -->
         <!-- 此处高度存在问题，可能是控件的问题，考虑换成MDX(https://github.com/mdx-js/mdx/tree/main) -->
         <!-- <markdown-viewer :text="problem.content" /> -->
         <a-typography class="text-area">
-          <a-typography-title :heading="5" bold>
-            题目描述
-          </a-typography-title>
-          <a-typography-paragraph v-for="(content, key) in problem.content" :key="key">{{ content }}</a-typography-paragraph>
+          <a-typography-title :heading="5" bold> 题目描述 </a-typography-title>
+          <a-typography-paragraph v-for="(content, key) in problem.content" :key="key">{{
+            content
+          }}</a-typography-paragraph>
         </a-typography>
 
         <!-- 输入输出描述 -->
@@ -145,7 +148,7 @@ onMounted(() => {
             <a-space v-for="(example, key) in problem.exampleCases" :key="key">
               <!-- 此处需要替换组件，markdown为临时使用 -->
               <markdown-viewer :text="example.caseIn" />
-              <markdown-viewer :text="example.caseOut"/>
+              <markdown-viewer :text="example.caseOut" />
             </a-space>
           </a-collapse-item>
 

@@ -23,7 +23,7 @@ const langStore = useLangStore()
 const langIndex = ref(1)
 const langList = ['C', 'C++', 'Python', 'Java']
 watch(langIndex, () => {
-  langStore.switchLang(langList[langIndex.value-1])
+  langStore.switchLang(langList[langIndex.value - 1])
 })
 
 const size = ref(0.5)
@@ -105,11 +105,8 @@ const onSubmitCode = () => {
       </template>
 
       <template #second>
-
         <div class="right">
-
           <a-row :wrap="false" style="margin-bottom: 16px">
-
             <a-col flex="200px">
               <a-select v-model="langIndex" placeholder="请选择编程语言">
                 <a-option :value="1">C</a-option>
@@ -126,7 +123,6 @@ const onSubmitCode = () => {
                 {{ submitButtonText }}
               </a-button>
             </a-col>
-
           </a-row>
 
           <code-editor
@@ -134,9 +130,7 @@ const onSubmitCode = () => {
             :style="{ height: 'calc(100vh - 157px)' }"
             @update:code="(c) => (submissionAdd.code = c)"
           />
-        
         </div>
-
       </template>
     </a-split>
   </div>
