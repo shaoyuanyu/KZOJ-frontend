@@ -143,6 +143,7 @@ onMounted(() => {
         <a-collapse :bordered="false" :default-active-key="['1', '0']">
           <a-collapse-item key="0" header="样例">
             <a-space v-for="(example, key) in problem.exampleCases" :key="key">
+              <!-- 此处需要替换组件，markdown为临时使用 -->
               <markdown-viewer :text="example.caseIn" />
               <markdown-viewer :text="example.caseOut"/>
             </a-space>

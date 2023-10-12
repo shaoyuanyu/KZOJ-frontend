@@ -1,7 +1,6 @@
 <script lang="ts" setup>
-import type { DescData } from '@arco-design/web-vue'
 import { Notification } from '@arco-design/web-vue'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 // components
 import ProblemDisplay from '@/components/problem/ProblemDisplay.vue'
@@ -10,16 +9,24 @@ import CodeEditor from '@/components/CodeEditor.vue'
 import { queryProblemVOById } from '@/api/problem'
 import { doSubmit, queryStatusById } from '@/api/submission'
 // models
-import type { JudgeConfig, Problem } from '@/models/problem'
+import type { Problem } from '@/models/problem'
 import type { SubmissionAdd } from '@/models/submission'
+// store
+import { useLangStore } from '@/stores/lang'
 
 // Props
 const props = defineProps<{ id: string }>()
 
 const router = useRouter()
 
+const langStore = useLangStore()
+const langIndex = ref(1)
+const langList = ['C', 'C++', 'Python', 'Java']
+watch(langIndex, () => {
+  langStore.switchLang(langList[langIndex.value-1])
+})
+
 const size = ref(0.5)
-//const problem = ref({ judgeConfig: {} as JudgeConfig } as Problem)
 const problem = ref<Problem>({
   id: '',
   creator: { id: '', userName: '', avatarUrl: '', email: '', auth: -1 },
@@ -40,32 +47,9 @@ const problem = ref<Problem>({
   inputDiscription: '',
   outputDiscription: ''
 })
-const basicInfo = ref<DescData[]>([])
 const submissionAdd = ref<SubmissionAdd>({ problemId: props.id } as SubmissionAdd)
 
 onMounted(() => {
-  /*
-  queryProblemVOById(props.id).then((resp) => {
-    const p = resp.data.data
-    document.title = p.title
-    problem.value = p
-    problem.value.content = `# ${p.title}\n` + p.content
-    basicInfo.value = [
-      { label: '时间限制', value: `${p.judgeConfig.timeLimit} ms` },
-      { label: '内存限制', value: `${p.judgeConfig.memoryLimit} MB` },
-      { label: '提交次数', value: `${p.submitCount}` },
-      { label: '通过次数', value: `${p.acceptedCount}` },
-      {
-        label: '通过率',
-        value:
-          p.submitCount === 0
-            ? '暂无数据'
-            : `${((p.acceptedCount / p.submitCount) * 100).toFixed(1)} %`
-      }
-    ]
-  })
-  */
-  console.log(props.id)
   queryProblemVOById(props.id).then((res) => {
     problem.value = res.data
     console.log(problem.value)
@@ -117,33 +101,42 @@ const onSubmitCode = () => {
   <div id="problem">
     <a-split v-model:size="size" :max="0.7" :min="0.3" class="box">
       <template #first>
-        <ProblemDisplay :problem="problem" language="Python" />
+        <ProblemDisplay :problem="problem" :language="langStore.lang" />
       </template>
 
       <template #second>
+
         <div class="right">
+
           <a-row :wrap="false" style="margin-bottom: 16px">
+
             <a-col flex="200px">
-              <a-select v-model="submissionAdd.lang" placeholder="请选择编程语言">
-                <a-option :value="1" disabled>C</a-option>
-                <a-option :value="2" disabled>C++</a-option>
-                <a-option :value="3">Java</a-option>
-                <a-option :value="4" disabled>Python</a-option>
+              <a-select v-model="langIndex" placeholder="请选择编程语言">
+                <a-option :value="1">C</a-option>
+                <a-option :value="2">C++</a-option>
+                <a-option :value="3">Python</a-option>
+                <a-option :value="4">Java</a-option>
               </a-select>
             </a-col>
+
             <a-col flex="auto" />
+
             <a-col flex="150px">
               <a-button :loading="submitButtonLoading" long type="primary" @click="onSubmitCode">
                 {{ submitButtonText }}
               </a-button>
             </a-col>
+
           </a-row>
+
           <code-editor
             :code="submissionAdd.code"
             :style="{ height: 'calc(100vh - 157px)' }"
             @update:code="(c) => (submissionAdd.code = c)"
           />
+        
         </div>
+
       </template>
     </a-split>
   </div>
