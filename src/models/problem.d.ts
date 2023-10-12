@@ -11,7 +11,7 @@ export interface Problem {
   title: string
 
   // 题目描述
-  content: string
+  content: string[]
 
   // 备注
   remark: string
@@ -39,6 +39,18 @@ export interface Problem {
 
   // 创建时间
   createTime: string
+
+  // 难度等级
+  difficultLevel: string
+
+  // 题目来源
+	source: string
+
+  // 输入描述
+	inputDiscription: string
+
+  // 输出描述
+	outputDiscription: string
 }
 
 export interface JudgeConfig {
