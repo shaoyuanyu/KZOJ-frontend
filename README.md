@@ -7,6 +7,11 @@
 ## 项目时刻表
 
 | 状态 | 计划内容 | 分支 | 提出日期 | 完成日期 |
-| - | - | - | - | - |
-| 进行中 | 项目框架完善 | develop | 2023/10/8 | |
+| :-: | :-: | :-: | :-: | :-: |
+| 完成 | 项目框架完善 | develop | 2023/10/8 | 2023/10/13 |
+| 进行中 | ProblemAPI对接 | develop | 2023/10/13 |  |
+| 进行中 | 答题页面功能完善 | develop | 2023/10/13 |  |
 
+## Contributors
+
+![Contributors](https://contrib.rocks/image?repo=shaoyuanyu/KZOJ-frontend)
