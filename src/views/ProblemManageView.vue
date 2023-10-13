@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import ProblemsPanel from '@/components/ProblemsPanel.vue'
+import ProblemsPanel from '@/components/problems/ProblemsPanel.vue'
 </script>
 
 <template>

@@ -16,6 +16,7 @@ const text = computed(() => props.text || '')
       :style="props.style"
       :subfield="false"
       :toolbarsFlag="false"
+      editable="false"
       boxShadowStyle="none"
       defaultOpen="preview"
       previewBackground="#fff"

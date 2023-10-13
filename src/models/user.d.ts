@@ -1,25 +1,19 @@
 import type AuthEnum from '@/common/access/authEnum'
 
 export interface User {
-  /**
-   * ID
-   */
+  // ID
   id: string
-  /**
-   * 用户名
-   */
-  username: string
-  /**
-   * 头像 URL
-   */
+
+  // 用户名
+  userName: string
+
+  // 头像URL
   avatarUrl: string
-  /**
-   * 手机
-   */
-  phone: string
-  /**
-   * 权限
-   */
+
+  // 邮箱
+  email: string
+
+  // 权限
   auth: AuthEnum | number
 }
 

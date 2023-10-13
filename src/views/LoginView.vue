@@ -48,14 +48,26 @@ const setCodeCooling = () => {
 const loginLoading = ref(false)
 const onLogin = () => {
   loginLoading.value = true
+
   loginByCode(phone.value, code.value)
     .then((resp) => {
+      console.log(resp.data)
+
+      let user = { id: '000000', username: 'test', avatarUrl: '', phone: '', email: '', auth: 1 }
+      userStore.setUserInfo(user)
+      //localStorage.setItem('token', token)
+
+      const redirectPath = route.query.redirect as string
+      console.log(redirectPath)
+      router.push({ path: redirectPath ?? '/home', replace: true })
+      /*
       let { user, token } = resp.data.data
       userStore.setUserInfo(user)
       localStorage.setItem('token', token)
 
       const redirectPath = route.query.redirect as string
       router.push({ path: redirectPath ?? '/', replace: true })
+      */
     })
     .finally(() => (loginLoading.value = false))
 }
@@ -70,7 +82,7 @@ const onLogin = () => {
           <img alt="" src="/logo.svg" style="width: 50%" />
         </a-row>
         <a-space direction="vertical" fill size="medium">
-          <h1 style="text-align: center">MOJ - 莫莫在线评测系统</h1>
+          <h1 style="text-align: center">KZOJ</h1>
           <!-- 手机号 -->
           <a-input
             v-model="phone.value"

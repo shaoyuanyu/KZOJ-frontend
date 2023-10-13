@@ -24,5 +24,6 @@ import GlobalHeader from '@/layouts/GlobalHeader.vue'
   display: flex;
   flex-direction: column;
   background-color: var(--color-fill-1);
+  padding: 5px 5px;
 }
 </style>

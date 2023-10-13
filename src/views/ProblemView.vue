@@ -1,44 +1,58 @@
 <script lang="ts" setup>
+import { Notification } from '@arco-design/web-vue'
+import { onMounted, ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
+// components
+import ProblemDisplay from '@/components/problem/ProblemDisplay.vue'
+import CodeEditor from '@/components/CodeEditor.vue'
+// api
 import { queryProblemVOById } from '@/api/problem'
 import { doSubmit, queryStatusById } from '@/api/submission'
-import CodeEditor from '@/components/CodeEditor.vue'
-import MarkdownViewer from '@/components/MarkdownViewer.vue'
-import SubmissionsPanel from '@/components/SubmissionsPanel.vue'
-import type { JudgeConfig, Problem } from '@/models/problem'
+// models
+import type { Problem } from '@/models/problem'
 import type { SubmissionAdd } from '@/models/submission'
-import type { DescData } from '@arco-design/web-vue'
-import { Notification } from '@arco-design/web-vue'
-import { onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
+// store
+import { useLangStore } from '@/stores/lang'
 
+// Props
 const props = defineProps<{ id: string }>()
 
 const router = useRouter()
 
+const langStore = useLangStore()
+const langIndex = ref(1)
+const langList = ['C', 'C++', 'Python', 'Java']
+watch(langIndex, () => {
+  langStore.switchLang(langList[langIndex.value - 1])
+})
+
 const size = ref(0.5)
-const problem = ref({ judgeConfig: {} as JudgeConfig } as Problem)
-const basicInfo = ref<DescData[]>([])
+const problem = ref<Problem>({
+  id: '',
+  creator: { id: '', userName: '', avatarUrl: '', email: '', auth: -1 },
+  title: '',
+  content: [''],
+  remark: '',
+  tags: [''],
+  submitCount: 0,
+  acceptedCount: 0,
+  judgeConfig: [{ language: '', timeLimit: 0.0, memoryLimit: 0.0 }],
+  judgeCases: [{ caseIn: '', caseOut: '' }],
+  exampleCases: [{ caseIn: '', caseOut: '' }],
+  refAnswer: '',
+  createTime: '',
+
+  difficultLevel: '',
+  source: '',
+  inputDiscription: '',
+  outputDiscription: ''
+})
 const submissionAdd = ref<SubmissionAdd>({ problemId: props.id } as SubmissionAdd)
 
 onMounted(() => {
-  queryProblemVOById(props.id).then((resp) => {
-    const p = resp.data.data
-    document.title = p.title
-    problem.value = p
-    problem.value.content = `# ${p.title}\n` + p.content
-    basicInfo.value = [
-      { label: '时间限制', value: `${p.judgeConfig.timeLimit} ms` },
-      { label: '内存限制', value: `${p.judgeConfig.memoryLimit} MB` },
-      { label: '提交次数', value: `${p.submitCount}` },
-      { label: '通过次数', value: `${p.acceptedCount}` },
-      {
-        label: '通过率',
-        value:
-          p.submitCount === 0
-            ? '暂无数据'
-            : `${((p.acceptedCount / p.submitCount) * 100).toFixed(1)} %`
-      }
-    ]
+  queryProblemVOById(props.id).then((res) => {
+    problem.value = res.data
+    console.log(problem.value)
   })
 })
 
@@ -87,52 +101,30 @@ const onSubmitCode = () => {
   <div id="problem">
     <a-split v-model:size="size" :max="0.7" :min="0.3" class="box">
       <template #first>
-        <a-tabs animation default-active-key="1" lazy-load size="large">
-          <a-tab-pane key="1" title="浏览题目">
-            <markdown-viewer :text="problem.content" />
-            <a-descriptions
-              :column="5"
-              :data="basicInfo"
-              layout="inline-vertical"
-              style="margin: 0 32px 16px"
-            />
-            <a-collapse :bordered="false">
-              <a-collapse-item key="1" header="题目标签">
-                <a-space>
-                  <a-tag v-for="tag in problem.tags" :key="tag" color="arcoblue" size="large">
-                    {{ tag }}
-                  </a-tag>
-                </a-space>
-              </a-collapse-item>
-              <a-collapse-item key="2" header="参考答案">
-                <code-editor :code="problem.refAnswer" disabled />
-              </a-collapse-item>
-            </a-collapse>
-          </a-tab-pane>
-          <a-tab-pane key="2" disabled title="评论" />
-          <a-tab-pane key="3" title="提交记录">
-            <submissions-panel :problem-id="props.id" style="margin: 16px" type="problem" />
-          </a-tab-pane>
-        </a-tabs>
+        <ProblemDisplay :problem="problem" :language="langStore.lang" />
       </template>
+
       <template #second>
         <div class="right">
           <a-row :wrap="false" style="margin-bottom: 16px">
             <a-col flex="200px">
-              <a-select v-model="submissionAdd.lang" placeholder="请选择编程语言">
-                <a-option :value="1" disabled>C</a-option>
-                <a-option :value="2" disabled>C++</a-option>
-                <a-option :value="3">Java</a-option>
-                <a-option :value="4" disabled>Python</a-option>
+              <a-select v-model="langIndex" placeholder="请选择编程语言">
+                <a-option :value="1">C</a-option>
+                <a-option :value="2">C++</a-option>
+                <a-option :value="3">Python</a-option>
+                <a-option :value="4">Java</a-option>
               </a-select>
             </a-col>
+
             <a-col flex="auto" />
+
             <a-col flex="150px">
               <a-button :loading="submitButtonLoading" long type="primary" @click="onSubmitCode">
                 {{ submitButtonText }}
               </a-button>
             </a-col>
           </a-row>
+
           <code-editor
             :code="submissionAdd.code"
             :style="{ height: 'calc(100vh - 157px)' }"
