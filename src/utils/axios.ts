@@ -10,7 +10,7 @@ const $axios = axios.create({
 })
 */
 const $axios = axios.create({
-  baseURL: 'http://127.0.0.1:8081', // 公共 URL
+  baseURL: 'http://110.40.174.56:10086', // 公共 URL
   timeout: 3000 // 超时时间
 })
 
