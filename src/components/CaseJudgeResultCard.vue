@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import CodeEditor from '@/components/CodeEditor.vue'
+// import CodeEditor from '@/components/CodeEditor.vue'
 import { judgeStatusInfo } from '@/models/enumInfo'
 import type { CaseJudgeResult } from '@/models/submission'
 import { ref } from 'vue'
@@ -30,7 +30,7 @@ const emVisible = ref(false)
 
     <!-- 错误信息详情 -->
     <a-modal v-model:visible="emVisible" hide-cancel simple title="错误信息" width="70vw">
-      <code-editor :code="props.caseJudgeResult.em" disabled />
+      <!-- <code-editor :code="props.caseJudgeResult.em" disabled /> -->
     </a-modal>
 
     <a-card :title="`评测用例 #${props.index + 1}`" hoverable>

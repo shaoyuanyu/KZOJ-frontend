@@ -2,7 +2,7 @@
 import { querySubmissionVOById } from '@/api/submission'
 import { AuthEnum } from '@/common/access/authEnum'
 import CaseJudgeResultCard from '@/components/CaseJudgeResultCard.vue'
-import CodeEditor from '@/components/CodeEditor.vue'
+//import CodeEditor from '@/components/CodeEditor.vue'
 import { langInfo, submissionStatusInfo } from '@/models/enumInfo'
 import type { Submission } from '@/models/submission'
 import { useUserStore } from '@/stores/user'
@@ -49,7 +49,7 @@ onMounted(() => {
               </a-avatar>
             </a-col>
             <a-col style="margin-left: 8px">
-              {{ submission.user?.username }}
+              {{ submission.user?.userName }}
             </a-col>
           </a-row>
         </a-descriptions-item>
@@ -84,7 +84,8 @@ onMounted(() => {
         style="margin-top: 16px"
       >
         <a-collapse-item :key="1" header="查看提交源代码">
-          <code-editor :code="submission.code" disabled />
+          <!-- <code-editor :code="submission.code" disabled /> -->
+          <!-- <CodeEditor /> -->
         </a-collapse-item>
       </a-collapse>
     </a-card>

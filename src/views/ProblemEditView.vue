@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { addProblem, editProblem, queryMyProblemById } from '@/api/problem'
-import CodeEditor from '@/components/CodeEditor.vue'
+import CodeEditor from '@/components/code_editor/CodeEditor.vue'
 import MarkdownEditor from '@/components/MarkdownEditor.vue'
 import type { JudgeConfig, Problem } from '@/models/problem'
 import { Message } from '@arco-design/web-vue'
@@ -224,11 +224,12 @@ const onSubmit = () => {
         </a-form-item>
         <!-- 参考答案 -->
         <a-form-item id="refAnswer" field="refAnswer" label="参考答案">
-          <code-editor
+          <!-- <code-editor
             :code="form.refAnswer"
             :style="{ minHeight: '300px' }"
             @update:code="(c) => (form.refAnswer = c)"
-          />
+          /> -->
+          <!-- <CodeEditor language="c" /> -->
         </a-form-item>
         <!-- 按钮 -->
         <a-row justify="end">

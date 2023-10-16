@@ -4,15 +4,18 @@ import type { DescData } from '@arco-design/web-vue'
 import type { Problem } from '@/models/problem'
 import { onMounted, ref, watch } from 'vue'
 // components
-import CodeEditor from '@/components/CodeEditor.vue'
+import CodeEditor from '@/components/code/CodeEditor.vue'
 import MarkdownViewer from '@/components/MarkdownViewer.vue'
 import SubmissionsPanel from '@/components/submission_record/SubmissionsPanel.vue'
+// store
+import { useLangStore } from '@/stores/lang'
 
 // Props
 const props = defineProps<{
   problem: Problem
-  language: string
 }>()
+
+const langStore = useLangStore()
 
 const basicInfo = ref<DescData[]>([
   { label: '时间限制', value: '- ms' },
@@ -57,7 +60,7 @@ function updateBasicInfo(): void {
   var matched = false
 
   props.problem.judgeConfig.forEach((judgeConfig) => {
-    if (judgeConfig.language == props.language || (!matched && judgeConfig.language == 'Others')) {
+    if (judgeConfig.language == langStore.lang || (!matched && judgeConfig.language == 'Others')) {
       matched = true
       timeLimit = judgeConfig.timeLimit
       memoryLimit = judgeConfig.memoryLimit
@@ -76,6 +79,10 @@ function updateBasicInfo(): void {
 }
 
 watch(props, () => {
+  updateBasicInfo()
+})
+
+watch(langStore, () => {
   updateBasicInfo()
 })
 
@@ -161,7 +168,7 @@ onMounted(() => {
           </a-collapse-item>
 
           <a-collapse-item key="2" header="参考答案" disabled>
-            <code-editor :code="problem.refAnswer" disabled />
+            <!-- <code-editor :code="problem.refAnswer" disabled /> -->
           </a-collapse-item>
         </a-collapse>
       </a-tab-pane>
