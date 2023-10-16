@@ -1,30 +1,15 @@
 <script lang="ts" setup>
-import { Notification } from '@arco-design/web-vue'
-import { onMounted, ref, watch } from 'vue'
-import { useRouter } from 'vue-router'
+import { onMounted, ref } from 'vue'
 // components
 import ProblemDisplay from '@/components/problem/ProblemDisplay.vue'
-import CodeEditor from '@/components/CodeEditor.vue'
+import ProblemHandle from '@/components/problem/ProblemHandle.vue'
 // api
 import { queryProblemVOById } from '@/api/problem'
-import { doSubmit, queryStatusById } from '@/api/submission'
 // models
 import type { Problem } from '@/models/problem'
-import type { SubmissionAdd } from '@/models/submission'
-// store
-import { useLangStore } from '@/stores/lang'
 
 // Props
 const props = defineProps<{ id: string }>()
-
-const router = useRouter()
-
-const langStore = useLangStore()
-const langIndex = ref(1)
-const langList = ['C', 'C++', 'Python', 'Java']
-watch(langIndex, () => {
-  langStore.switchLang(langList[langIndex.value - 1])
-})
 
 const size = ref(0.5)
 const problem = ref<Problem>({
@@ -47,7 +32,13 @@ const problem = ref<Problem>({
   inputDiscription: '',
   outputDiscription: ''
 })
-const submissionAdd = ref<SubmissionAdd>({ problemId: props.id } as SubmissionAdd)
+
+const moved = ref(0)
+// 分割面板移动完毕
+function spiltMoved(): void {
+  // 0/1切换
+  moved.value = -moved.value + 1
+}
 
 onMounted(() => {
   queryProblemVOById(props.id).then((res) => {
@@ -55,82 +46,17 @@ onMounted(() => {
     console.log(problem.value)
   })
 })
-
-/**
- * 提交相关
- */
-const submitButtonText = ref('提交')
-const submitButtonLoading = ref(false)
-
-const startPollingSubmission = (id: string) => {
-  if (submitButtonLoading.value) {
-    return
-  }
-  submitButtonLoading.value = true
-  const polling = setInterval(() => {
-    queryStatusById(id).then((resp) => {
-      const submission = resp.data.data
-      const status = submission.status
-      if (status === 0) {
-        submitButtonText.value = '队列中'
-      } else if (status === 1) {
-        submitButtonText.value = '运行中'
-      } else {
-        clearInterval(polling)
-        submitButtonText.value = '提交'
-        submitButtonLoading.value = false
-        router.push('/submission/' + id)
-      }
-    })
-  }, 3000)
-}
-
-const onSubmitCode = () => {
-  doSubmit(submissionAdd.value).then((resp) => {
-    Notification.success({
-      title: '提交成功',
-      content: '评测需要一段时间, 请耐心等待',
-      position: 'bottomRight'
-    })
-    startPollingSubmission(resp.data.data.id)
-  })
-}
 </script>
 
 <template>
   <div id="problem">
-    <a-split v-model:size="size" :max="0.7" :min="0.3" class="box">
+    <a-split v-model:size="size" :max="0.7" :min="0.3" class="box" @move-end="spiltMoved()">
       <template #first>
-        <ProblemDisplay :problem="problem" :language="langStore.lang" />
+        <ProblemDisplay :problem="problem" />
       </template>
 
       <template #second>
-        <div class="right">
-          <a-row :wrap="false" style="margin-bottom: 16px">
-            <a-col flex="200px">
-              <a-select v-model="langIndex" placeholder="请选择编程语言">
-                <a-option :value="1">C</a-option>
-                <a-option :value="2">C++</a-option>
-                <a-option :value="3">Python</a-option>
-                <a-option :value="4">Java</a-option>
-              </a-select>
-            </a-col>
-
-            <a-col flex="auto" />
-
-            <a-col flex="150px">
-              <a-button :loading="submitButtonLoading" long type="primary" @click="onSubmitCode">
-                {{ submitButtonText }}
-              </a-button>
-            </a-col>
-          </a-row>
-
-          <code-editor
-            :code="submissionAdd.code"
-            :style="{ height: 'calc(100vh - 157px)' }"
-            @update:code="(c) => (submissionAdd.code = c)"
-          />
-        </div>
+        <ProblemHandle :id="id" :moved="moved" />
       </template>
     </a-split>
   </div>

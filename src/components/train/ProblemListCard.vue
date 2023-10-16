@@ -6,51 +6,53 @@
 </template>
 
 <script>
-import { reactive } from 'vue';
+import { reactive } from 'vue'
 
 export default {
   setup() {
     const columns = [
       {
         title: '编号',
-        dataIndex: 'key',
+        dataIndex: 'key'
       },
       {
         title: '标题',
-        dataIndex: 'tilte',
+        dataIndex: 'tilte'
       },
       {
         title: '权限',
-        dataIndex: 'authority',
+        dataIndex: 'authority'
       },
       {
         title: '分类',
-        dataIndex: 'classify',
+        dataIndex: 'classify'
       },
       {
         title: '题目数',
-        dataIndex: 'nums',
+        dataIndex: 'nums'
       },
       {
         title: '作者',
-        dataIndex: 'author',
-      },
-    ];
+        dataIndex: 'author'
+      }
+    ]
     //来一段测试数据
-    const data = reactive([{
-      key: '001',
-      title: 'Hello World',
-      authority: '公开',
-      classify: '数据结构',
-      nums: 5,
-      author: '王',
-    }]);
+    const data = reactive([
+      {
+        key: '001',
+        title: 'Hello World',
+        authority: '公开',
+        classify: '数据结构',
+        nums: 5,
+        author: '王'
+      }
+    ])
 
     return {
       columns,
       data
     }
-  },
+  }
 }
 </script>
 
