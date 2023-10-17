@@ -1,23 +1,24 @@
 <template>
-  <div class="card">
-    <h1>全部比赛</h1>
-    <a-list>
-      <a-list-item v-for="idx in 4" :key="idx">
-        <a-list-item-meta title="Beijing Bytedance Technology Co., Ltd.">
-          <template #description>
-            <div><icon-calendar /> 2023-09-03 00:18:35 <icon-schedule /> 3小时</div>
-          </template>
-          <template #avatar>
-            <a-avatar shape="square">
-              <img
-                alt="avatar"
-                src="https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/3ee5f13fb09879ecb5185e440cef6eb9.png~tplv-uwbnlip3yd-webp.webp"
-              />
-            </a-avatar>
-          </template>
-        </a-list-item-meta>
-      </a-list-item>
-    </a-list>
+  <div :style="{ display: 'flex' }">
+    <a-card :style="{ width: '100%' }" title="全部比赛">
+      <a-list>
+        <a-list-item v-for="idx in 4" :key="idx">
+          <a-list-item-meta title="周测">
+            <template #description>
+              <div><icon-calendar /> 2023-09-03 00:18:35 <icon-schedule /> 3小时</div>
+            </template>
+            <template #avatar>
+              <a-avatar shape="square">
+                <img
+                  alt="avatar"
+                  src="material/Competition.jpg"
+                />
+              </a-avatar>
+            </template>
+          </a-list-item-meta>
+        </a-list-item>
+      </a-list>
+    </a-card>
   </div>
 </template>
 

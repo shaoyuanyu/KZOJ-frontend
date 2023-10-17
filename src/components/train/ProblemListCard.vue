@@ -1,7 +1,8 @@
 <template>
-  <div class="card">
-    <h2>题目列表</h2>
-    <a-table :columns="columns" :data="data" />
+  <div :style="{ display: 'flex' }">
+    <a-card :style="{ width: '100%' }" title="题目列表">
+      <a-table :columns="columns" :data="data" />
+    </a-card>
   </div>
 </template>
 
