@@ -15,6 +15,7 @@ const props = defineProps<{
   moved?: number
 }>()
 
+// 编程语言选择
 const langStore = useLangStore()
 const langIndex = ref(1)
 const langList = ['C', 'C++', 'Python', 'Java']
@@ -22,11 +23,16 @@ watch(langIndex, () => {
   langStore.switchLang(langList[langIndex.value - 1])
 })
 
+//
 const isDark = ref(true)
 const fontSize = ref(16)
+const tabLen = ref(4)
 watch(fontSize, () => {
   console.log(fontSize.value)
 })
+
+// 设置按钮
+const settingVisible = ref(false)
 
 /**
  * 提交相关
@@ -77,31 +83,6 @@ const onSubmitCode = () => {
 
 <template>
   <div class="right">
-    <a-row :wrap="false" class="nav-bar">
-      <a-col :span="6">
-        <a-input-number
-          v-model="fontSize"
-          :default-value="16"
-          :precision="0"
-          :step="1"
-          :min="8"
-          :max="28"
-          :style="{ width: '80px' }"
-          placeholder="选择字号"
-        >
-          <template #plus>
-            <icon-plus />
-          </template>
-          <template #minus>
-            <icon-minus />
-          </template>
-        </a-input-number>
-      </a-col>
-
-      <a-col :span="10" />
-
-      <a-col :span="8"></a-col>
-    </a-row>
 
     <a-row :wrap="false" class="nav-bar">
       <a-col :span="10">
@@ -113,7 +94,72 @@ const onSubmitCode = () => {
         </a-select>
       </a-col>
 
-      <a-col :span="6" />
+      <a-col :span="6">
+        <div style="display: flex; justify-content: center;">
+          <a-button @click="settingVisible=true" shape="circle">
+            <template #icon>
+              <icon-settings />
+            </template>
+          </a-button>
+        </div>
+        
+        <a-modal v-model:visible="settingVisible" hide-cancel :closable="false">
+          <template #title>
+            代码编辑器设置
+          </template>
+          <div style="display: flex; flex-direction: column; font-size: large;">
+
+            <a-row style="align-items: center;">
+              <a-col :span="18">
+                <p>字体选择: </p>
+              </a-col>
+              <a-col :span="6">
+                <a-select placeholder="选择字体">
+                  <a-option>字体1</a-option>
+                  <a-option>字体2</a-option>
+                </a-select>
+              </a-col>
+            </a-row>
+
+            <a-row style="align-items: center">
+              <a-col :span="18">
+                <p>字体大小: </p>
+              </a-col>
+              <a-col :span="6">
+                <a-input-number
+                  v-model="fontSize"
+                  :default-value="16"
+                  :precision="0"
+                  :step="1"
+                  :min="8"
+                  :max="28"
+                  placeholder="选择字号"
+                >
+                  <template #plus>
+                    <icon-plus />
+                  </template>
+                  <template #minus>
+                    <icon-minus />
+                  </template>
+                </a-input-number>
+              </a-col>
+            </a-row>
+
+            <a-row style="align-items: center">
+              <a-col :span="18">
+                <p>Tab长度: </p>
+              </a-col>
+              <a-col :span="6">
+                <a-select v-model="tabLen" placeholder="选择Tab长度">
+                  <a-option :value="4">4</a-option>
+                  <a-option :value="2">2</a-option>
+                </a-select>
+              </a-col>
+            </a-row>
+
+          </div>
+        </a-modal>
+      </a-col>
 
       <a-col :span="8">
         <a-button :loading="submitButtonLoading" long type="primary" @click="onSubmitCode">
