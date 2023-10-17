@@ -33,6 +33,22 @@ const settingVisible = ref(false)
 
 // 控制台
 const consoleVisible = ref(false)
+const consoleColTopRadius = ref('6px')
+function openConsole():void {
+  consoleVisible.value = true
+  consoleColTopRadius.value = '0px'
+}
+function closeConsole():void {
+  consoleVisible.value = false
+  consoleColTopRadius.value = '6px'
+}
+function switchConsole():void {
+  if ( !consoleVisible.value ) {
+    openConsole()
+  } else {
+    closeConsole()
+  }
+}
 </script>
 
 <template>
@@ -165,67 +181,18 @@ const consoleVisible = ref(false)
         }"
       />
     </div>
-
-    <!-- 控制台 -->
-    <div>
-      <div
-        id="console"
-        style="
-          width: 100%;
-          height: 200px;
-          background-color: var(--color-fill-2);
-          position: relative;
-          overflow: hidden;
-          line-height: 200px;
-          text-align: center;
-        "
-        v-if="consoleVisible"
-      />
-
-      <a-row style="display: flex; align-items: center; height: 50px; background-color: antiquewhite;">
-        <a-col :span="12">
-          <div style="display: flex; justify-content: left;">
-            <a-button type="primary" @click="consoleVisible=true">控制台</a-button>
-          </div>
-        </a-col>
-
-        <a-col :span="12">
-          <div style="display: flex; justify-content: right;">
-            <a-button-group type="primary">
-              <a-button>运行</a-button>
-              <a-button>提交</a-button>
-            </a-button-group>
-          </div>
-        </a-col>
-      </a-row>
-
-      <!-- 控制台弹出drawer -->
-      <a-drawer
-        popup-container="#console"
-        placement="bottom"
-        height="180px"
-        :visible="consoleVisible"
-        @ok="consoleVisible = false"
-        @cancel="consoleVisible = false"
-      >
-        <template #title> Title </template>
-        <div
-          >You can customize modal body text by the current situation. This modal
-          will be closed immediately once you press the OK button.</div
-        >
-      </a-drawer>
-    </div>
   </div>
 
-  <div v-else>
+  <div :style="{ height: `calc(100% - 50px)` }" v-else>
     <a-split
       direction="vertical"
-      style="height: 1000px"
-      min="0.4"
+      :style="{ height: `calc(100%)` }"
+      default-size="0.8"
+      min="0.2"
       max="0.8"
     >
       <template #first>
-        <div style="height: 100%">
+        <div class="editor-card-flow">
           <!-- 导航栏 -->
           <a-row :wrap="false" class="nav-bar">
             <a-col :span="10">
@@ -358,56 +325,59 @@ const consoleVisible = ref(false)
       </template>
 
       <template #second>
-        <!-- 控制台 -->
-        <div>
-          <div
-            id="console"
-            style="
-              width: 100%;
-              height: 200px;
-              background-color: var(--color-fill-2);
-              position: relative;
-              overflow: hidden;
-              line-height: 200px;
-              text-align: center;
-            "
-          />
+        <!-- 控制台 - 展开 -->
+        <div
+          id="console"
+          class="console-card-flow"
+          style="
+            width: 100%;
+            height: 100%;
+            background-color: aqua;
+            position: relative;
+            overflow: hidden;
+          "
+        />
 
-          <a-row style="display: flex; align-items: center; height: 50px; background-color: antiquewhite;">
-            <a-col :span="12">
-              <div style="display: flex; justify-content: left;">
-                <a-button type="primary" @click="consoleVisible=true">控制台</a-button>
-              </div>
-            </a-col>
-
-            <a-col :span="12">
-              <div style="display: flex; justify-content: right;">
-                <a-button-group type="primary">
-                  <a-button>运行</a-button>
-                  <a-button>提交</a-button>
-                </a-button-group>
-              </div>
-            </a-col>
-          </a-row>
-
-          <!-- 控制台弹出drawer -->
-          <a-drawer
-            popup-container="#console"
-            placement="bottom"
-            height="180px"
-            :visible="consoleVisible"
-            @ok="consoleVisible = false"
-            @cancel="consoleVisible = false"
-          >
-            <template #title> Title </template>
-            <div
-              >You can customize modal body text by the current situation. This modal
-              will be closed immediately once you press the OK button.</div
-            >
-          </a-drawer>
-        </div>
+        <!-- 控制台弹出drawer -->
+        <a-drawer
+          popup-container="#console"
+          placement="bottom"
+          height="180px"
+          :visible="consoleVisible"
+          @ok="closeConsole()"
+          @cancel="closeConsole()"
+        >
+          <template #title> 控制台 </template>
+          <div>
+            控制台内容
+          </div>
+        </a-drawer>
       </template>
     </a-split>
+  </div>
+
+  <!-- 控制台 栏 -->
+  <div>
+    <a-row class="console-col">
+      <a-col :span="1" />
+
+      <a-col :span="11">
+        <div style="display: flex; justify-content: left;">
+          <a-button type="primary" @click="switchConsole()">控制台</a-button>
+        </div>
+      </a-col>
+
+      <a-col :span="11">
+        <div style="display: flex; justify-content: right;">
+          <a-button-group type="primary">
+            <a-button>运行</a-button>
+            <a-button>提交</a-button>
+          </a-button-group>
+        </div>
+      </a-col>
+
+      <a-col :span="1" />
+    </a-row>
   </div>
 </template>
 
@@ -417,19 +387,51 @@ const consoleVisible = ref(false)
   flex-direction: column;
 
   padding: 16px 16px;
+  margin-bottom: 10px;
 
-  /* 16*2 */
-  height: calc(100% - 32px);
+  /* 16*2 + 50 + 10 */
+  height: calc(100% - 32px - 60px);
 
-  background-color: aquamarine;
+  border-radius: 6px;
+  background-color: #fff;
 }
 .nav-bar {
   margin-bottom: 16px;
 }
 .code-editor-container {
   /* 16*2 + 16 + 160 */
-  height: calc(100% - 48px - 50px);
+  height: calc(100% - 48px);
+}
 
-  /* background-color: antiquewhite; */
+.console-col {
+  display: flex;
+  align-items: center;
+
+  height: 50px;
+
+  border-top-left-radius: v-bind("consoleColTopRadius");
+  border-top-right-radius: v-bind("consoleColTopRadius");
+
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+
+  background-color: #fff;
+}
+
+.editor-card-flow {
+  /* 16*2 */
+  height: calc(100% - 32px);
+
+  padding: 16px 16px;
+
+  border-radius: 6px;
+  background-color: #fff;
+}
+.console-card-flow {
+  height: 100%;
+
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  background-color: #fff;
 }
 </style>

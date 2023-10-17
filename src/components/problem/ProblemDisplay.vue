@@ -92,11 +92,12 @@ onMounted(() => {
 </script>
 
 <template>
-  <div style="display: flex; flex-direction: column; width: 100%; height: 100%">
+  <div class="problem-display-card">
     <a-page-header
       :style="{ background: 'var(--color-bg-2)' }"
       :title="problem.title"
       :show-back="false"
+      style="background-color: rgba(255, 255, 255, 0);"
     >
       <template #subtitle>
         <a-tag :color="getLevelTagColor(problem.difficultLevel)" bordered
@@ -185,6 +186,17 @@ onMounted(() => {
 </template>
 
 <style scoped>
+.problem-display-card {
+  display: flex;
+  flex-direction: column;
+  
+  width: 100%;
+  height: 100%;
+
+  border-radius: 6px;
+  background-color: #fff;
+}
+
 /* 修改标签栏间距 */
 :deep(.arco-tabs-content) {
   padding: 0;

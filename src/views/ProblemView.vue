@@ -74,10 +74,10 @@ onMounted(() => {
 }
 
 /* 修改分割面板样式 */
-:deep(.arco-split-pane) {
+/* :deep(.arco-split-pane) {
   border-radius: 6px;
   background-color: #fff;
-}
+} */
 
 /* 修改背景 */
 #problem {
