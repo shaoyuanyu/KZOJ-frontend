@@ -3,10 +3,6 @@ import { ref, watch } from 'vue'
 // component
 //import CodeEditor from '@/components/code/CodeEditor.vue'
 import CodeEditor from '@/components/code_editor/CodeEditor.vue'
-// api
-import { doSubmit, queryStatusById } from '@/api/submission'
-// models
-import type { SubmissionAdd } from '@/models/submission'
 // store
 import { useLangStore } from '@/stores/lang'
 
@@ -33,52 +29,6 @@ watch(fontSize, () => {
 
 // 设置按钮
 const settingVisible = ref(false)
-
-/**
- * 提交相关
- */
-const submissionAdd = ref<SubmissionAdd>({ problemId: props.id } as SubmissionAdd)
-const submitButtonText = ref('提交')
-const submitButtonLoading = ref(false)
-
-const startPollingSubmission = (id: string) => {
-  /*
-  if (submitButtonLoading.value) {
-    return
-  }
-  submitButtonLoading.value = true
-  const polling = setInterval(() => {
-    queryStatusById(id).then((resp) => {
-      const submission = resp.data.data
-      const status = submission.status
-      if (status === 0) {
-        submitButtonText.value = '队列中'
-      } else if (status === 1) {
-        submitButtonText.value = '运行中'
-      } else {
-        clearInterval(polling)
-        submitButtonText.value = '提交'
-        submitButtonLoading.value = false
-        router.push('/submission/' + id)
-      }
-    })
-  }, 3000)
-  */
-}
-
-const onSubmitCode = () => {
-  console.log(fontSize.value)
-  /*
-  doSubmit(submissionAdd.value).then((resp) => {
-    Notification.success({
-      title: '提交成功',
-      content: '评测需要一段时间, 请耐心等待',
-      position: 'bottomRight'
-    })
-    startPollingSubmission(resp.data.data.id)
-  })
-  */
-}
 </script>
 
 <template>
@@ -108,7 +58,6 @@ const onSubmitCode = () => {
             代码编辑器设置
           </template>
           <div style="display: flex; flex-direction: column; font-size: large;">
-
             <a-row style="align-items: center;">
               <a-col :span="18">
                 <p>字体选择: </p>
@@ -156,15 +105,8 @@ const onSubmitCode = () => {
                 </a-select>
               </a-col>
             </a-row>
-
           </div>
         </a-modal>
-      </a-col>
-
-      <a-col :span="8">
-        <a-button :loading="submitButtonLoading" long type="primary" @click="onSubmitCode">
-          {{ submitButtonText }}
-        </a-button>
       </a-col>
     </a-row>
 
