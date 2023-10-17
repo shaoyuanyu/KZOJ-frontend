@@ -23,6 +23,7 @@ watch(langIndex, () => {
 const isDark = ref(true)
 const fontSize = ref(16)
 const tabLen = ref(4)
+const editorTheme = ref("system")
 watch(fontSize, () => {
   console.log(fontSize.value)
 })
@@ -58,6 +59,19 @@ const settingVisible = ref(false)
             代码编辑器设置
           </template>
           <div style="display: flex; flex-direction: column; font-size: large;">
+            <a-row style="align-items: center">
+              <a-col :span="18">
+                <p>编辑器主题: </p>
+              </a-col>
+              <a-col :span="6">
+                <a-select v-model="editorTheme" placeholder="选择编辑器主题">
+                  <a-option :value="'system'">跟随系统</a-option>
+                  <a-option :value="'vs'">vs light</a-option>
+                  <a-option :value="'vs-dark'">vs dark</a-option>
+                </a-select>
+              </a-col>
+            </a-row>
+            
             <a-row style="align-items: center;">
               <a-col :span="18">
                 <p>字体选择: </p>
