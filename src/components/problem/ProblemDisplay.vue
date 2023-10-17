@@ -93,16 +93,17 @@ onMounted(() => {
 
 <template>
   <div class="problem-display-card">
+    <!-- 页面导航栏 -->
     <a-page-header
       :style="{ background: 'var(--color-bg-2)' }"
       :title="problem.title"
       :show-back="false"
-      style="background-color: rgba(255, 255, 255, 0);"
+      class="problem-page-header"
     >
       <template #subtitle>
-        <a-tag :color="getLevelTagColor(problem.difficultLevel)" bordered
-          >{{ problem.difficultLevel }}级</a-tag
-        >
+        <a-tag :color="getLevelTagColor(problem.difficultLevel)" bordered>
+          {{ problem.difficultLevel }}级
+          </a-tag>
       </template>
 
       <template #breadcrumb>
@@ -113,6 +114,7 @@ onMounted(() => {
       </template>
     </a-page-header>
 
+    <!-- 信息区域 -->
     <a-tabs
       animation
       default-active-key="1"
@@ -122,15 +124,15 @@ onMounted(() => {
       style="height: 100%"
     >
       <a-tab-pane key="1" title="浏览题目">
-        <a-scrollbar style="height: calc(100vh - 121px); overflow: auto;">
+        <a-scrollbar style="height: calc(100vh - 121px); overflow-y: auto">
           <!-- 题目内容 -->
           <!-- 此处高度存在问题，可能是控件的问题，考虑换成MDX(https://github.com/mdx-js/mdx/tree/main) -->
           <!-- <markdown-viewer :text="problem.content" /> -->
           <a-typography class="text-area">
             <a-typography-title :heading="5" bold> 题目描述 </a-typography-title>
-            <a-typography-paragraph v-for="(content, key) in problem.content" :key="key">{{
-              content
-            }}</a-typography-paragraph>
+            <a-typography-paragraph v-for="(content, key) in problem.content" :key="key">
+              {{ content }}
+            </a-typography-paragraph>
           </a-typography>
 
           <!-- 输入输出描述 -->
@@ -152,8 +154,8 @@ onMounted(() => {
           />
 
           <!-- 样例/标签/参考答案 -->
-          <a-collapse :bordered="false" :default-active-key="['1', '0']">
-            <a-collapse-item key="0" header="样例">
+          <a-collapse :bordered="false" :default-active-key="[]">
+            <a-collapse-item key="0" header="样例" disabled>
               <a-space v-for="(example, key) in problem.exampleCases" :key="key">
                 <!-- 此处需要替换组件，markdown为临时使用 -->
                 <markdown-viewer :text="example.caseIn" />
@@ -161,7 +163,7 @@ onMounted(() => {
               </a-space>
             </a-collapse-item>
 
-            <a-collapse-item key="1" header="题目标签">
+            <a-collapse-item key="1" header="题目标签" disabled>
               <a-space>
                 <a-tag v-for="tag in problem.tags" :key="tag" color="arcoblue" size="large">
                   {{ tag }}
@@ -176,7 +178,7 @@ onMounted(() => {
         </a-scrollbar>
       </a-tab-pane>
 
-      <a-tab-pane key="2" disabled title="评论" />
+      <a-tab-pane key="2" title="评论" disabled/>
 
       <a-tab-pane key="3" title="提交记录">
         <submissions-panel :problem-id="props.problem.id" style="margin: 16px" type="problem" />
@@ -197,6 +199,13 @@ onMounted(() => {
   background-color: #fff;
 }
 
+.problem-page-header {
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0);
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
 /* 修改标签栏间距 */
 :deep(.arco-tabs-content) {
   padding: 0;
@@ -204,8 +213,10 @@ onMounted(() => {
 
 /* 修改标签面板高度 */
 :deep(.arco-tabs-pane) {
-  overflow-y: auto;
+  /* overflow-y: auto; */
   height: calc(100vh - 121px);
+  /* ？85px为经验值，非计算值？ */
+  /* height: calc(100% - 85px); */
 }
 
 .text-area {
