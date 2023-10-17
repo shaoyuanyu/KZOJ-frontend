@@ -22,6 +22,9 @@ watch(langIndex, () => {
   langStore.switchLang(langList[langIndex.value - 1])
 })
 
+const isDark = ref(false)
+const fontSize = ref(16)
+
 /**
  * 提交相关
  */
@@ -72,6 +75,22 @@ const onSubmitCode = () => {
   <div class="right">
     <a-row :wrap="false" class="nav-bar">
       <a-col :span="10">
+        <a-select v-model="fontSize" placeholder="选择字号">
+          <a-option :value="10">10</a-option>
+          <a-option :value="16">16</a-option>
+          <a-option :value="18">18</a-option>
+          <a-option :value="20">24</a-option>
+          <a-option :value="32">32</a-option>
+        </a-select>
+      </a-col>
+
+      <a-col :span="6" />
+
+      <a-col :span="8"></a-col>
+    </a-row>
+
+    <a-row :wrap="false" class="nav-bar">
+      <a-col :span="10">
         <a-select v-model="langIndex" placeholder="请选择编程语言">
           <a-option :value="1">C</a-option>
           <a-option :value="2">C++</a-option>
@@ -89,15 +108,14 @@ const onSubmitCode = () => {
       </a-col>
     </a-row>
 
-    <!-- <code-editor
-      :language="langStore.lang.toLowerCase()"
-      :editor-font-size="16"
-      editor-theme="vs-dark"
-      :style="{ height: 'calc(100vh - 157px)' }"
-      :resized="moved"
-    /> -->
     <div style="height: calc(100% - 32px)">
-      <CodeEditor :language="langStore.lang.toLowerCase()" />
+      <CodeEditor
+        :language="langStore.lang.toLowerCase()"
+        :appearance="{ 
+          isDark: false, 
+          fontSize: fontSize 
+        }"
+      />
     </div>
   </div>
 </template>
