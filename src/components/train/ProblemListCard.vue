@@ -1,56 +1,64 @@
 <template>
-  <div :style="{ display: 'flex' }">
+  <div>
     <a-card :style="{ width: '100%' }" title="题目列表">
-      <a-table :columns="columns" :data="data" />
+      <ul>
+        <li v-for="(part, partIndex) in data" :key="partIndex">
+          <h2>{{ part.title }}</h2>
+          <ul>
+            <li v-for="(chapter, chapterIndex) in part.chapters" :key="chapterIndex">
+              <h3>{{ chapter.title }}</h3>
+              <ul>
+                <li v-for="(section, sectionIndex) in chapter.sections" :key="sectionIndex">
+                  <a-button :type="section.buttonType" class="left-align" long>
+                    <span>{{ section }}</span>
+                  </a-button>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </a-card>
   </div>
 </template>
 
 <script>
 import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default {
   setup() {
-    const columns = [
-      {
-        title: '编号',
-        dataIndex: 'key'
-      },
-      {
-        title: '标题',
-        dataIndex: 'tilte'
-      },
-      {
-        title: '权限',
-        dataIndex: 'authority'
-      },
-      {
-        title: '分类',
-        dataIndex: 'classify'
-      },
-      {
-        title: '题目数',
-        dataIndex: 'nums'
-      },
-      {
-        title: '作者',
-        dataIndex: 'author'
-      }
-    ]
-    //来一段测试数据
+    // 示例数据，多级列表
     const data = reactive([
       {
-        key: '001',
-        title: 'Hello World',
-        authority: '公开',
-        classify: '数据结构',
-        nums: 5,
-        author: '王'
+        title: '基础篇',
+        chapters: [
+          {
+            title: '第一部分 C++语言',
+            sections: ['C++语言入门', '顺序结构程序设计']
+          },
+          {
+            title: '第二部分 基础算法',
+            sections: ['高精度计算', '数据排序']
+          }
+        ]
+      },
+      {
+        title: '高级篇',
+        chapters: [
+          {
+            title: '第三部分 数据结构',
+            sections: ['数组', '链表', '树']
+          },
+          {
+            title: '第四部分 算法',
+            sections: ['排序算法', '查找算法']
+          }
+        ]
       }
     ])
 
     return {
-      columns,
       data
     }
   }
@@ -58,16 +66,8 @@ export default {
 </script>
 
 <style scoped>
-.card {
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  padding: 20px;
-  background-color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
+.left-align {
+  text-align: left;
 }
 
-.card:hover {
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-}
 </style>
