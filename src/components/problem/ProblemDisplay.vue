@@ -202,6 +202,8 @@ onMounted(() => {
 .problem-page-header {
   height: 60px;
   background-color: rgba(255, 255, 255, 0);
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
 }
 
 /* 修改标签栏间距 */
