@@ -326,26 +326,16 @@ function switchConsole():void {
 
       <template #second>
         <!-- 控制台 - 展开 -->
-        <div
-          id="console"
-          class="console-card-flow"
-          style="
-            width: 100%;
-            height: 100%;
-            background-color: aqua;
-            position: relative;
-            overflow: hidden;
-          "
-        />
+        <div id="console" class="console-card-flow" />
 
         <!-- 控制台弹出drawer -->
         <a-drawer
           popup-container="#console"
           placement="bottom"
-          height="180px"
+          height="100%"
           :visible="consoleVisible"
-          @ok="closeConsole()"
-          @cancel="closeConsole()"
+          :closable="false"
+          :footer="false"
         >
           <template #title> 控制台 </template>
           <div>
@@ -429,6 +419,9 @@ function switchConsole():void {
 }
 .console-card-flow {
   height: 100%;
+
+  position: relative;
+  overflow-y: hidden;
 
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
