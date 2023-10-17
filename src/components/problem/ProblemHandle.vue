@@ -20,7 +20,7 @@ watch(langIndex, () => {
 })
 
 //
-const isDark = ref(true)
+const isDark = ref(false)
 const fontSize = ref(16)
 const tabLen = ref(4)
 const editorTheme = ref("system")
@@ -37,23 +37,51 @@ const settingVisible = ref(false)
 
     <a-row :wrap="false" class="nav-bar">
       <a-col :span="10">
-        <a-select v-model="langIndex" placeholder="请选择编程语言">
-          <a-option :value="1">C</a-option>
-          <a-option :value="2">C++</a-option>
-          <a-option :value="3">Python</a-option>
-          <a-option :value="4">Java</a-option>
-        </a-select>
+        <a-space>
+          <p>语言选择: </p>
+          <a-select v-model="langIndex" placeholder="请选择编程语言">
+            <a-option :value="1">C</a-option>
+            <a-option :value="2">C++</a-option>
+            <a-option :value="3">Python</a-option>
+            <a-option :value="4">Java</a-option>
+          </a-select>
+        </a-space>
       </a-col>
 
-      <a-col :span="6">
-        <div style="display: flex; justify-content: center;">
-          <a-button @click="settingVisible=true" shape="circle">
-            <template #icon>
-              <icon-settings />
-            </template>
-          </a-button>
+      <a-col :span="14">
+        <div style="display: flex; justify-content: right;">
+          <a-button-group type="primary">
+            <!-- 撤销 -->
+            <a-button>
+              <template #icon>
+                <icon-reply />
+              </template>
+            </a-button>
+
+            <!-- 历史提交 -->
+            <a-button>
+              <template #icon>
+                <icon-history />
+              </template>
+            </a-button>
+
+            <!-- 重置 -->
+            <a-button>
+              <template #icon>
+                <icon-refresh />
+              </template>
+            </a-button>
+
+            <!-- 设置 -->
+            <a-button @click="settingVisible=true">
+              <template #icon>
+                <icon-settings />
+              </template>
+            </a-button>
+          </a-button-group>
         </div>
         
+        <!-- 弹出框 -->
         <a-modal v-model:visible="settingVisible" hide-cancel :closable="false">
           <template #title>
             代码编辑器设置
