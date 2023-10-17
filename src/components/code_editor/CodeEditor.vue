@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, toRefs, watch } from 'vue'
 import { useDebounceFn, useResizeObserver, useStorage } from '@vueuse/core'
-
 // Import monaco
 // https://github.com/vitejs/vite/discussions/1791
 import * as monaco from 'monaco-editor'
@@ -10,10 +9,14 @@ import JSONWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker'
 import CSSWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker'
 import HTMLWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker'
 import TSWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker'
-import { StorageName, initialEditorValue, useDarkGlobal } from './utils'
+// utils
+import { StorageName, initialEditorValue, lightTheme, darkTheme } from "./utils"
+// models
+import type { Appearance } from "./models/appearance"
 
 const props = defineProps<{
   language: string
+  appearance: Appearance
 }>()
 
 const emit = defineEmits<(e: 'change', payload: typeof editorValue.value) => void>()
@@ -36,19 +39,16 @@ const container = ref<HTMLDivElement | null>(null)
 
 let editor: monaco.editor.IStandaloneCodeEditor
 
-const isDark = useDarkGlobal()
-
-const { language } = toRefs(props)
+const { language, appearance } = toRefs(props)
 
 const editorState = useStorage<Record<string, any>>(StorageName.EDITOR_STATE, {})
 const editorValue = useStorage<Record<string, any>>(StorageName.EDITOR_VALUE, initialEditorValue)
 
 onMounted(() => {
-  console.log(props.language)
-
   editor = monaco.editor.create(container.value!, {
     language: language.value,
-    theme: isDark.value ? 'vs-dark' : 'vs'
+    theme: appearance.value.isDark ? darkTheme : lightTheme,
+    fontSize: appearance.value.fontSize
   })
 
   emit('change', editorValue.value)
@@ -83,9 +83,10 @@ watch(language, (currentTab, prevTab) => {
   }
 })
 
-watch(isDark, (value) => {
+watch(appearance, (appearance) => {
   editor.updateOptions({
-    theme: value ? 'vs-dark' : 'vs'
+    theme: appearance.isDark ? darkTheme : lightTheme,
+    fontSize: appearance.fontSize
   })
 })
 
@@ -100,6 +101,5 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <!-- <div ref="container" style="height: calc(100% - 2.5rem)" /> -->
-  <div ref="container" style="height: 100%" />
+  <div ref="container" style="height: calc(100% - 2.5rem)" />
 </template>
