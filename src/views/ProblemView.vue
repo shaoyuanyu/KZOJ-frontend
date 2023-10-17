@@ -79,31 +79,21 @@ onMounted(() => {
   background-color: #fff;
 }
 
-/* 修改标签栏间距 */
-:deep(.arco-tabs-content) {
-  padding: 0;
-}
-
-/* 修改标签面板高度 */
-:deep(.arco-tabs-pane) {
-  overflow-y: auto;
-  height: calc(100vh - 121px);
-}
-
 /* 修改背景 */
 #problem {
-  flex: 1;
+  /* flex: 1; */
   padding: 8px;
   background-color: var(--color-fill-2);
 }
 
 /* 修改分割框高度 */
 #problem .box {
-  height: calc(100vh - 77px);
+  /* 60 + 8*2 */
+  height: calc(100vh - 90px);
 }
 
 /* 修改分割框内边距 */
-#problem .box .right {
-  padding: 16px;
-}
+/* #problem .box .right {
+  
+} */
 </style>

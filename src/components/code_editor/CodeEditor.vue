@@ -101,5 +101,6 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div ref="container" style="height: calc(100% - 2.5rem)" />
+  <!-- <div ref="container" style="height: calc(100% - 2.5rem)" /> -->
+  <div ref="container" style="height: calc(100%)" />
 </template>

@@ -22,8 +22,11 @@ watch(langIndex, () => {
   langStore.switchLang(langList[langIndex.value - 1])
 })
 
-const isDark = ref(false)
+const isDark = ref(true)
 const fontSize = ref(16)
+watch(fontSize, () => {
+  console.log(fontSize.value)
+})
 
 /**
  * 提交相关
@@ -58,6 +61,7 @@ const startPollingSubmission = (id: string) => {
 }
 
 const onSubmitCode = () => {
+  console.log(fontSize.value)
   /*
   doSubmit(submissionAdd.value).then((resp) => {
     Notification.success({
@@ -74,17 +78,27 @@ const onSubmitCode = () => {
 <template>
   <div class="right">
     <a-row :wrap="false" class="nav-bar">
-      <a-col :span="10">
-        <a-select v-model="fontSize" placeholder="选择字号">
-          <a-option :value="10">10</a-option>
-          <a-option :value="16">16</a-option>
-          <a-option :value="18">18</a-option>
-          <a-option :value="20">24</a-option>
-          <a-option :value="32">32</a-option>
-        </a-select>
+      <a-col :span="6">
+        <a-input-number
+          v-model="fontSize"
+          :default-value="16"
+          :precision="0"
+          :step="1"
+          :min="8"
+          :max="28"
+          :style="{ width: '80px' }"
+          placeholder="选择字号"
+        >
+          <template #plus>
+            <icon-plus />
+          </template>
+          <template #minus>
+            <icon-minus />
+          </template>
+        </a-input-number>
       </a-col>
 
-      <a-col :span="6" />
+      <a-col :span="10" />
 
       <a-col :span="8"></a-col>
     </a-row>
@@ -108,12 +122,12 @@ const onSubmitCode = () => {
       </a-col>
     </a-row>
 
-    <div style="height: calc(100% - 32px)">
+    <div class="code-editor-container">
       <CodeEditor
         :language="langStore.lang.toLowerCase()"
         :appearance="{ 
-          isDark: false, 
-          fontSize: fontSize 
+          isDark: isDark, 
+          fontSize: fontSize!
         }"
       />
     </div>
@@ -125,12 +139,20 @@ const onSubmitCode = () => {
   display: flex;
   flex-direction: column;
 
+  padding: 16px 16px;
+
+  /* 16*2 */
   height: calc(100% - 32px);
 
   /* background-color: aquamarine; */
-  padding-bottom: 16px;
 }
 .nav-bar {
-  margin-bottom: 16px
+  margin-bottom: 16px;
+}
+.code-editor-container {
+  /* 16*2 + 16 */
+  height: calc(100% - 48px);
+
+  /* background-color: antiquewhite; */
 }
 </style>

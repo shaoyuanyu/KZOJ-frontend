@@ -121,56 +121,58 @@ onMounted(() => {
       style="height: 100%"
     >
       <a-tab-pane key="1" title="浏览题目">
-        <!-- 题目内容 -->
-        <!-- 此处高度存在问题，可能是控件的问题，考虑换成MDX(https://github.com/mdx-js/mdx/tree/main) -->
-        <!-- <markdown-viewer :text="problem.content" /> -->
-        <a-typography class="text-area">
-          <a-typography-title :heading="5" bold> 题目描述 </a-typography-title>
-          <a-typography-paragraph v-for="(content, key) in problem.content" :key="key">{{
-            content
-          }}</a-typography-paragraph>
-        </a-typography>
+        <a-scrollbar style="height: calc(100vh - 121px); overflow: auto;">
+          <!-- 题目内容 -->
+          <!-- 此处高度存在问题，可能是控件的问题，考虑换成MDX(https://github.com/mdx-js/mdx/tree/main) -->
+          <!-- <markdown-viewer :text="problem.content" /> -->
+          <a-typography class="text-area">
+            <a-typography-title :heading="5" bold> 题目描述 </a-typography-title>
+            <a-typography-paragraph v-for="(content, key) in problem.content" :key="key">{{
+              content
+            }}</a-typography-paragraph>
+          </a-typography>
 
-        <!-- 输入输出描述 -->
-        <a-typography class="text-area">
-          <a-typography-title :heading="5">输入描述</a-typography-title>
-          <a-typography-paragraph>{{ problem.inputDiscription }}</a-typography-paragraph>
-          <a-typography-title :heading="5">输出描述</a-typography-title>
-          <a-typography-paragraph>{{ problem.outputDiscription }}</a-typography-paragraph>
-        </a-typography>
+          <!-- 输入输出描述 -->
+          <a-typography class="text-area">
+            <a-typography-title :heading="5">输入描述</a-typography-title>
+            <a-typography-paragraph>{{ problem.inputDiscription }}</a-typography-paragraph>
+            <a-typography-title :heading="5">输出描述</a-typography-title>
+            <a-typography-paragraph>{{ problem.outputDiscription }}</a-typography-paragraph>
+          </a-typography>
 
-        <br />
+          <br />
 
-        <!-- 限制和提交信息描述 -->
-        <a-descriptions
-          :column="5"
-          :data="basicInfo"
-          layout="inline-vertical"
-          style="margin: 0 32px 16px"
-        />
+          <!-- 限制和提交信息描述 -->
+          <a-descriptions
+            :column="5"
+            :data="basicInfo"
+            layout="inline-vertical"
+            style="margin: 0 32px 16px"
+          />
 
-        <!-- 样例/标签/参考答案 -->
-        <a-collapse :bordered="false" :default-active-key="['1', '0']">
-          <a-collapse-item key="0" header="样例">
-            <a-space v-for="(example, key) in problem.exampleCases" :key="key">
-              <!-- 此处需要替换组件，markdown为临时使用 -->
-              <markdown-viewer :text="example.caseIn" />
-              <markdown-viewer :text="example.caseOut" />
-            </a-space>
-          </a-collapse-item>
+          <!-- 样例/标签/参考答案 -->
+          <a-collapse :bordered="false" :default-active-key="['1', '0']">
+            <a-collapse-item key="0" header="样例">
+              <a-space v-for="(example, key) in problem.exampleCases" :key="key">
+                <!-- 此处需要替换组件，markdown为临时使用 -->
+                <markdown-viewer :text="example.caseIn" />
+                <markdown-viewer :text="example.caseOut" />
+              </a-space>
+            </a-collapse-item>
 
-          <a-collapse-item key="1" header="题目标签">
-            <a-space>
-              <a-tag v-for="tag in problem.tags" :key="tag" color="arcoblue" size="large">
-                {{ tag }}
-              </a-tag>
-            </a-space>
-          </a-collapse-item>
+            <a-collapse-item key="1" header="题目标签">
+              <a-space>
+                <a-tag v-for="tag in problem.tags" :key="tag" color="arcoblue" size="large">
+                  {{ tag }}
+                </a-tag>
+              </a-space>
+            </a-collapse-item>
 
-          <a-collapse-item key="2" header="参考答案" disabled>
-            <!-- <code-editor :code="problem.refAnswer" disabled /> -->
-          </a-collapse-item>
-        </a-collapse>
+            <a-collapse-item key="2" header="参考答案" disabled>
+              <!-- <code-editor :code="problem.refAnswer" disabled /> -->
+            </a-collapse-item>
+          </a-collapse>
+        </a-scrollbar>
       </a-tab-pane>
 
       <a-tab-pane key="2" disabled title="评论" />
@@ -192,23 +194,6 @@ onMounted(() => {
 :deep(.arco-tabs-pane) {
   overflow-y: auto;
   height: calc(100vh - 121px);
-}
-
-/* 修改背景 */
-#problem {
-  flex: 1;
-  padding: 8px;
-  background-color: var(--color-fill-2);
-}
-
-/* 修改分割框高度 */
-#problem .box {
-  height: calc(100vh - 77px);
-}
-
-/* 修改分割框内边距 */
-#problem .box .right {
-  padding: 16px;
 }
 
 .text-area {
