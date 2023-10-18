@@ -6,6 +6,7 @@
         :default-expanded-keys='all'
         :default-selected-keys="[]"
         :size='large'
+        :show-line="true"
         class="custom-tree"
       />
     </a-card>
@@ -16,10 +17,13 @@
 import { ref } from 'vue';
 import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
+import WelcomeCard from '@/components/home/WelcomeCard.vue'
 
 export default {
   //示例数据
   setup() {
+    const router = useRouter()
+
     const colors = [
       '#E57373',  // 淡红色
       '#FFB74D',  // 橙黄色
@@ -121,10 +125,20 @@ export default {
     
     const size = ref('large');
 
+     // 点击树节点时触发路由跳转
+     const handleNodeClick = (node) => {
+      if (node.key) {
+        // 获取节点的 key，可以根据 key 决定路由路径
+        const routePath = '/';
+        router.push(routePath);
+      }
+    };
+
     return {
       treeData,
       size,
       colors,
+      handleNodeClick,
     }
   }
 }
