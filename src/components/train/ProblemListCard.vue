@@ -8,140 +8,125 @@
         :size='large'
         :show-line="true"
         class="custom-tree"
+        @select="handleNodeSelect"
       />
     </a-card>
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { ref } from 'vue';
-import { reactive } from 'vue'
-import { useRouter } from 'vue-router'
-import WelcomeCard from '@/components/home/WelcomeCard.vue'
+import { useRouter } from 'vue-router';
 
-export default {
-  //示例数据
-  setup() {
-    const router = useRouter()
+const colors = [
+  '#E57373',
+  '#FFB74D',
+  '#FF9800',
+  '#FFD54F',
+  '#AED581',
+  '#4CAF50',
+  '#26C6DA',
+  '#2196F3',
+  '#1976D2',
+  '#9C27B0',
+  '#E91E63',
+  '#E91E63',
+  '#B0BEC5'
+];
 
-    const colors = [
-      '#E57373',  // 淡红色
-      '#FFB74D',  // 橙黄色
-      '#FF9800',  // 橙色
-      '#FFD54F',  // 金黄色
-      '#AED581',  // 淡绿色
-      '#4CAF50',  // 绿色
-      '#26C6DA',  // 青色
-      '#2196F3',  // 蓝色
-      '#1976D2',  // 深蓝色
-      '#9C27B0',  // 紫色
-      '#E91E63',  // 粉红紫色
-      '#E91E63',  // 洋红色
-      '#B0BEC5'   // 灰色
-    ];
-
-
-    const treeData = [
+const treeData = [
+  {
+    title: '基础篇',
+    children: [
       {
-        title: '基础篇',
+        title: '第一部分 C++语言',
         children: [
           {
-            title: '第一部分 C++语言',
-            children: [
-              {
-                title: 'C++语言入门',
-                style: {
-                  backgroundColor: colors[1], 
-                }
-              },
-              {
-                title: '顺序结构程序设计',
-                style: {
-                  backgroundColor: colors[2], 
-                }
-              }
-            ]
+            title: 'C++语言入门',
+            style: {
+              backgroundColor: '#e0e0e0',
+            }
           },
           {
-            title: '第二部分 基础算法',
-            children: [
-              {
-                title: '高精度计算',
-                style: {
-                  backgroundColor: colors[3], 
-                }
-              },
-              {
-                title: '数据排序',
-                style: {
-                  backgroundColor: colors[4], 
-                }
-              }
-            ]
-          },
-        ],
+            title: '顺序结构程序设计',
+            style: {
+              backgroundColor: '#e0e0e0',
+            }
+          }
+        ]
       },
       {
-        title: '高级篇',
-          children: [
-            {
-              title: '第三部分 数据结构',
-              key: '0-0-2',
-              children: [
-                {
-                  title: '数组',
-                  style: {
-                    backgroundColor: colors[5], 
-                  }
-                },
-                {
-                  title: '链表',
-                  style: {
-                    backgroundColor: colors[6], 
-                  }
-                }
-              ]
-            },
-            {
-              title: '第四部分 算法',
-              children: [
-                {
-                  title: '排序算法',
-                  style: {
-                    backgroundColor: colors[7], 
-                  }
-                },
-                {
-                  title: '查找算法',
-                  style: {
-                    backgroundColor: colors[8], 
-                  }
-                }
-              ]
-            },
-          ],
+        title: '第二部分 基础算法',
+        children: [
+          {
+            title: '高精度计算',
+            style: {
+              backgroundColor: '#e0e0e0',
+            }
+          },
+          {
+            title: '数据排序',
+            style: {
+              backgroundColor: '#e0e0e0',
+            }
+          }
+        ]
       },
-    ];
-    
-    const size = ref('large');
+    ],
+  },
+  {
+    title: '高级篇',
+    children: [
+      {
+        title: '第三部分 数据结构',
+        children: [
+          {
+            title: '数组',
+            style: {
+              backgroundColor: '#e0e0e0',
+            }
+          },
+          {
+            title: '链表',
+            style: {
+              backgroundColor: '#e0e0e0',
+            }
+          }
+        ]
+      },
+      {
+        title: '第四部分 算法',
+        children: [
+          {
+            title: '排序算法',
+            style: {
+              backgroundColor: '#e0e0e0',
+            }
+          },
+          {
+            title: '查找算法',
+            style: {
+              backgroundColor: '#e0e0e0',
+            }
+          }
+        ]
+      },
+    ],
+  },
+];
 
-     // 点击树节点时触发路由跳转
-     const handleNodeClick = (node) => {
-      if (node.key) {
-        // 获取节点的 key，可以根据 key 决定路由路径
-        const routePath = '/';
-        router.push(routePath);
-      }
-    };
 
-    return {
-      treeData,
-      size,
-      colors,
-      handleNodeClick,
-    }
+const router = useRouter();
+
+const handleNodeSelect = (selectedKeys: string[] | number[], info: { selected?: boolean; selectedNodes: TreeNodeData[]; node?: TreeNodeData; e?: Event }) => {
+  const { selectedNodes, node, e } = info;
+  // 处理点击事件，例如，导航到相关页面
+  if (selectedKeys.length > 0) {
+    const routePath = '/'; // 设置合适的路径
+    router.push(routePath);
   }
-}
+  
+};
 </script>
 
 <style scoped>
