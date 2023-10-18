@@ -99,6 +99,19 @@ const routes: RouteRecordRaw[] = [
       }
     ]
   },
+
+  {
+    path: '/',
+    component: () => import('@/layouts/BasicLayout.vue'),
+    children: [
+      {
+        path: '/trainsection',
+        meta: { title: '浏览题目' },
+        component: () => import('@/components/train/SectionView.vue'),
+      },
+      
+    ]
+  },
   {
     path: '/login',
     meta: { title: '登录' },

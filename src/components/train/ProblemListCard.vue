@@ -126,9 +126,8 @@ const router = useRouter();
 
 const handleNodeSelect = (selectedKeys: string[] | number[], info: { selected?: boolean; selectedNodes: TreeNodeData[]; node?: TreeNodeData; e?: Event }) => {
   const { selectedNodes, node, e } = info;
-  // 处理点击事件，例如，导航到相关页面
   if (selectedKeys.length > 0) {
-    const routePath = '/'; // 设置合适的路径
+    const routePath = '/trainsection'; 
     router.push(routePath);
   }
 
