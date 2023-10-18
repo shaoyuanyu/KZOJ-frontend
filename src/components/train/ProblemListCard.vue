@@ -20,44 +20,57 @@ import { useRouter } from 'vue-router'
 export default {
   //示例数据
   setup() {
+    const colors = [
+      '#E57373',  // 淡红色
+      '#FFB74D',  // 橙黄色
+      '#FF9800',  // 橙色
+      '#FFD54F',  // 金黄色
+      '#AED581',  // 淡绿色
+      '#4CAF50',  // 绿色
+      '#26C6DA',  // 青色
+      '#2196F3',  // 蓝色
+      '#1976D2',  // 深蓝色
+      '#9C27B0',  // 紫色
+      '#E91E63',  // 粉红紫色
+      '#E91E63',  // 洋红色
+      '#B0BEC5'   // 灰色
+    ];
+
 
     const treeData = [
       {
         title: '基础篇',
-        key: '0-0',
         children: [
           {
             title: '第一部分 C++语言',
-            key: '0-0-0',
             children: [
               {
                 title: 'C++语言入门',
                 style: {
-                  backgroundColor: "#3491FA", 
+                  backgroundColor: colors[1], 
                 }
               },
               {
                 title: '顺序结构程序设计',
                 style: {
-                  backgroundColor: "#3491FA", 
+                  backgroundColor: colors[2], 
                 }
               }
             ]
           },
           {
             title: '第二部分 基础算法',
-            key: '0-0-1',
             children: [
               {
                 title: '高精度计算',
                 style: {
-                  backgroundColor: "#3491FA",
+                  backgroundColor: colors[3], 
                 }
               },
               {
                 title: '数据排序',
                 style: {
-                  backgroundColor: "#3491FA",
+                  backgroundColor: colors[4], 
                 }
               }
             ]
@@ -66,7 +79,6 @@ export default {
       },
       {
         title: '高级篇',
-        key: '0-1',
           children: [
             {
               title: '第三部分 数据结构',
@@ -75,31 +87,30 @@ export default {
                 {
                   title: '数组',
                   style: {
-                    backgroundColor: "#3491FA",
+                    backgroundColor: colors[5], 
                   }
                 },
                 {
                   title: '链表',
                   style: {
-                    backgroundColor: "#3491FA",
+                    backgroundColor: colors[6], 
                   }
                 }
               ]
             },
             {
               title: '第四部分 算法',
-              key: '0-0-3',
               children: [
                 {
                   title: '排序算法',
                   style: {
-                    backgroundColor: "#3491FA", 
+                    backgroundColor: colors[7], 
                   }
                 },
                 {
                   title: '查找算法',
                   style: {
-                    backgroundColor: "#3491FA", // 设置背景颜色
+                    backgroundColor: colors[8], 
                   }
                 }
               ]
@@ -107,21 +118,18 @@ export default {
           ],
       },
     ];
-
+    
     const size = ref('large');
 
     return {
       treeData,
       size,
+      colors,
     }
   }
 }
 </script>
 
 <style scoped>
-.custom-tree .ant-tree-treenode.level-2 {
-  /* 第三级元素样式 */
-  background-color: blue; /* 背景颜色 */
-  border: 1px solid red; /* 边框属性 */
-}
+
 </style>
