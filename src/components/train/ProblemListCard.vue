@@ -37,9 +37,11 @@ const colors = [
 const treeData = [
   {
     title: '基础篇',
+    disabled: true,
     children: [
       {
         title: '第一部分 C++语言',
+        disabled: true,
         children: [
           {
             title: 'C++语言入门',
@@ -57,6 +59,7 @@ const treeData = [
       },
       {
         title: '第二部分 基础算法',
+        disabled: true,
         children: [
           {
             title: '高精度计算',
@@ -76,9 +79,11 @@ const treeData = [
   },
   {
     title: '高级篇',
+    disabled: true,
     children: [
       {
         title: '第三部分 数据结构',
+        disabled: true,
         children: [
           {
             title: '数组',
@@ -96,6 +101,7 @@ const treeData = [
       },
       {
         title: '第四部分 算法',
+        disabled: true,
         children: [
           {
             title: '排序算法',
@@ -125,7 +131,7 @@ const handleNodeSelect = (selectedKeys: string[] | number[], info: { selected?: 
     const routePath = '/'; // 设置合适的路径
     router.push(routePath);
   }
-  
+
 };
 </script>
 
