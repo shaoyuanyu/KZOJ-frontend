@@ -24,7 +24,7 @@ export function editProblem(problem: Problem) {
 // /problem/{id}
 export function queryProblemVOById(id: string) {
   //return $axios.get<RespObj<Problem>>('/problem/' + id)
-  return $axios.get<Problem>('/problem/' + id)
+  return $axios.get<Problem>('/problem/getProblem/' + id)
 }
 
 //

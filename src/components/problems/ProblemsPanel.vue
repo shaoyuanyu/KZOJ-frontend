@@ -1,15 +1,22 @@
 <script lang="ts" setup>
-import { deleteProblemById, queryRecordVOWithPagination } from '@/api/problem'
-import type { Problem, ProblemQuery } from '@/models/problem'
-import { useUserStore } from '@/stores/user'
-import type { TableColumnData } from '@arco-design/web-vue'
 import { onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
+import type { TableColumnData } from '@arco-design/web-vue'
+// api
+import { deleteProblemById, queryRecordVOWithPagination } from '@/api/problem'
+import { queryProblemPreviews } from '@/api/problemPreviews'
+// models
+import type { Problem, ProblemQuery } from '@/models/problem'
+import type { ProblemPreview, ProblemPreviewsQuery } from '@/models/problemPreviews'
+// stores
+import { useUserStore } from '@/stores/user'
+
 
 const props = defineProps<{
   type: 'all' | 'mine'
   title: string
 }>()
+
 
 const router = useRouter()
 const userStore = useUserStore()
@@ -107,9 +114,18 @@ const onSorterChange = (dataIndex: string, direction: string) => {
 }
 
 const onSearch = () => {
-  queryRecordVOWithPagination(searchParam.value).then((resp) => {
-    tableData.value = resp.data.data.records
-    totalData.value = resp.data.data.total
+  // queryRecordVOWithPagination(searchParam.value).then((resp) => {
+  //   tableData.value = resp.data.data.records
+  //   totalData.value = resp.data.data.total
+  // })
+  var p: ProblemPreviewsQuery = {
+    sortedBy: "id",
+    orderASC: "true",
+    rangeStart: 1,
+    rangeEnd: 20
+  }
+  queryProblemPreviews(p).then((res) => {
+    console.log(res.data)
   })
 }
 
