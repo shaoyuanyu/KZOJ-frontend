@@ -1,128 +1,73 @@
-<template>
-  <div>
-    <a-card :style="{ width: '100%' }">
-      <a-tree
-        :data="treeData"
-        :default-expand-all="true"
-        :show-line="true"
-        class="custom-tree"
-        @select="handleNodeSelect"
-      />
-    </a-card>
-  </div>
-</template>
+<script lang="ts">
+import { reactive } from 'vue';
+import { h } from 'vue';
 
-<script setup lang="ts">
-import { useRouter } from 'vue-router';
-
-interface TreeNodeData {
-  title: string;
-  disabled: boolean;
-  children?: TreeNodeData[];
-  style?: object;
-};
-
-const treeData = [
-  {
-    title: '基础篇',
-    selectable: false,
-    children: [
+export default {
+  setup() {
+    const columns = [
       {
-        title: '第一部分 C++语言',
-        selectable: false,
-        children: [
-          {
-            title: 'C++语言入门',
-            style: {
-              backgroundColor: '#e0e0e0',
-            }
-          },
-          {
-            title: '顺序结构程序设计',
-            style: {
-              backgroundColor: '#e0e0e0',
-            }
-          }
-        ]
+        // 对应 private Long id; "主键id"
+        title: '编号',
+        dataIndex: 'id',
       },
       {
-        title: '第二部分 基础算法',
-        selectable: false,
-        children: [
-          {
-            title: '高精度计算',
-            style: {
-              backgroundColor: '#e0e0e0',
-            }
-          },
-          {
-            title: '数据排序',
-            style: {
-              backgroundColor: '#e0e0e0',
-            }
-          }
-        ]
+        // 对应private String title; "训练题单标题"
+        title: '标题',
+        dataIndex: 'title',
       },
-    ],
+      {
+        // 对应private String auth; "训练题单权限类型：Public、Private"
+        title: '权限',
+        dataIndex: 'auth',
+      },
+      {
+        // 对应private String name; "训练题单专用分类名字"
+        title: '分类',
+        dataIndex: 'categoryName',
+      },
+      {
+        // 暂时未找到对应
+        title: '进度',
+        dataIndex: 'progress',
+      },
+      {
+        title: '题目数',
+        dataIndex: 'num',
+      },
+      {
+        title: '作者',
+        dataIndex: 'author',
+      },
+      {
+        title: '最近更新',
+        dataIndex: 'gmtModified',
+      },
+    ];
+    const data = reactive([
+      {
+        id: 1000,
+        title: '入门',
+        auth: 'Private',
+        categoryName: 'C++基础',
+        progress: 0,
+        num: 3,
+        author: 'root',
+        gmtModified: '2024-01-01'
+      }
+    ]);
+
+    return {
+      columns,
+      data
+    }
   },
-  {
-    title: '高级篇',
-    selectable: false,
-    children: [
-      {
-        title: '第三部分 数据结构',
-        selectable: false,
-        children: [
-          {
-            title: '数组',
-            style: {
-              backgroundColor: '#e0e0e0',
-            }
-          },
-          {
-            title: '链表',
-            style: {
-              backgroundColor: '#e0e0e0',
-            }
-          }
-        ]
-      },
-      {
-        title: '第四部分 算法',
-        selectable: false,
-        children: [
-          {
-            title: '排序算法',
-            style: {
-              backgroundColor: '#e0e0e0',
-            }
-          },
-          {
-            title: '查找算法',
-            style: {
-              backgroundColor: '#e0e0e0',
-            }
-          }
-        ]
-      },
-    ],
-  },
-];
-
-
-const router = useRouter();
-
-const handleNodeSelect = (
-  selectedKeys: (string | number)[],
-  data: { selected?: boolean; selectedNodes: TreeNodeData[]; node?: TreeNodeData; e?: Event }
-) => {
-  if (selectedKeys.length > 0) {
-    const routePath = '/train/trainsection'; 
-    router.push(routePath);
-  }
-};
+}
 </script>
 
-<style scoped>
-
-</style>
+<template>
+  <a-table :columns="columns" :data="data">
+    <template #auth="{ record }">
+      <a-tag>{{ record.auth }}</a-tag>
+    </template>
+  </a-table>
+</template>
