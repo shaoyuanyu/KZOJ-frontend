@@ -101,11 +101,11 @@ const routes: RouteRecordRaw[] = [
   },
 
   {
-    path: '/',
+    path: '/train',
     component: () => import('@/layouts/BasicLayout.vue'),
     children: [
       {
-        path: '/trainsection',
+        path: '/train/trainsection',
         meta: { title: '浏览题目' },
         component: () => import('@/components/train/SectionView.vue'),
       },

@@ -117,7 +117,7 @@ const handleNodeSelect = (
   data: { selected?: boolean; selectedNodes: TreeNodeData[]; node?: TreeNodeData; e?: Event }
 ) => {
   if (selectedKeys.length > 0) {
-    const routePath = '/trainsection'; 
+    const routePath = '/train/trainsection'; 
     router.push(routePath);
   }
 };
