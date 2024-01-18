@@ -2,9 +2,7 @@
   <div>
     <!-- 导入 SearchCard 组件 -->
     <SearchCard />
-
-    <div style="margin-top: 20px"></div>
-
+    <div style="margin-top: 5px"></div>
     <!-- 导入 ProblemListCard 组件 -->
     <ProblemListCard />
   </div>
@@ -19,22 +17,6 @@ export default {
   components: {
     SearchCard,
     ProblemListCard
-  },
-  data() {
-    return {
-      // 需要从后端拿数据
-      // 测试数据
-      problems: [
-        {
-          id: 1,
-          title: '题目标题 1',
-          permission: 'public',
-          category: 'data-structures',
-          numProblems: 5,
-          author: 'John Doe'
-        }
-      ]
-    }
   }
 }
 </script>

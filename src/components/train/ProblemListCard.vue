@@ -1,11 +1,9 @@
 <template>
   <div>
-    <a-card :style="{ width: '100%' }" title="题目列表">
+    <a-card :style="{ width: '100%' }">
       <a-tree
         :data="treeData"
-        :default-expanded-keys='all'
-        :default-selected-keys="[]"
-        :size='large'
+        :default-expand-all="true"
         :show-line="true"
         class="custom-tree"
         @select="handleNodeSelect"
@@ -15,33 +13,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-const colors = [
-  '#E57373',
-  '#FFB74D',
-  '#FF9800',
-  '#FFD54F',
-  '#AED581',
-  '#4CAF50',
-  '#26C6DA',
-  '#2196F3',
-  '#1976D2',
-  '#9C27B0',
-  '#E91E63',
-  '#E91E63',
-  '#B0BEC5'
-];
+interface TreeNodeData {
+  title: string;
+  disabled: boolean;
+  children?: TreeNodeData[];
+  style?: object;
+};
 
 const treeData = [
   {
     title: '基础篇',
-    disabled: true,
+    selectable: false,
     children: [
       {
         title: '第一部分 C++语言',
-        disabled: true,
+        selectable: false,
         children: [
           {
             title: 'C++语言入门',
@@ -59,7 +47,7 @@ const treeData = [
       },
       {
         title: '第二部分 基础算法',
-        disabled: true,
+        selectable: false,
         children: [
           {
             title: '高精度计算',
@@ -79,11 +67,11 @@ const treeData = [
   },
   {
     title: '高级篇',
-    disabled: true,
+    selectable: false,
     children: [
       {
         title: '第三部分 数据结构',
-        disabled: true,
+        selectable: false,
         children: [
           {
             title: '数组',
@@ -101,7 +89,7 @@ const treeData = [
       },
       {
         title: '第四部分 算法',
-        disabled: true,
+        selectable: false,
         children: [
           {
             title: '排序算法',
@@ -124,13 +112,14 @@ const treeData = [
 
 const router = useRouter();
 
-const handleNodeSelect = (selectedKeys: string[] | number[], info: { selected?: boolean; selectedNodes: TreeNodeData[]; node?: TreeNodeData; e?: Event }) => {
-  const { selectedNodes, node, e } = info;
+const handleNodeSelect = (
+  selectedKeys: (string | number)[],
+  data: { selected?: boolean; selectedNodes: TreeNodeData[]; node?: TreeNodeData; e?: Event }
+) => {
   if (selectedKeys.length > 0) {
     const routePath = '/trainsection'; 
     router.push(routePath);
   }
-
 };
 </script>
 

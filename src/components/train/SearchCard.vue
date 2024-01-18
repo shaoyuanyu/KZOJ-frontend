@@ -1,9 +1,12 @@
 <template>
-  <div :style="{ display: 'flex' }">
-    <a-card :style="{ width: '100%' }" title="检索">
-      <h2>搜索训练</h2>
-      <div class="search-container">
-        <a-input-search :style="{ width: '320px' }" placeholder="输入关键词" search-button />
+  <div :style="{ display: 'flex', flexDirection: 'column', width: '100%' }">
+    <a-card :style="{ width: '100%' }">
+      <!-- 搜索栏和标题的容器 -->
+      <div :style="{ display: 'flex', alignItems: 'center', marginBottom: '0px' }">
+        <h2 :style="{ marginRight: '30px' }">搜索训练</h2>
+        <div class="search-container">
+          <a-input-search :style="{ width: '320px' }" placeholder="输入关键词" search-button />
+        </div>
       </div>
       <div>
         <h3>训练权限</h3>
