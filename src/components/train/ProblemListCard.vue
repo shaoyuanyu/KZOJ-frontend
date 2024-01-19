@@ -1,9 +1,12 @@
 <script lang="ts">
 import { reactive } from 'vue';
-import { h } from 'vue';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 export default {
   setup() {
+    const router = useRouter();
+    const show = ref(true)
     const columns = [
       {
         // 对应 private Long id; "主键id"
@@ -53,21 +56,67 @@ export default {
         num: 3,
         author: 'root',
         gmtModified: '2024-01-01'
+      },
+      {
+        id: 1001,
+        title: '顺序结构',
+        auth: 'Private',
+        categoryName: 'C++基础',
+        progress: 0,
+        num: 28,
+        author: 'root',
+        gmtModified: '2024-01-02'
+      },
+      {
+        id: 1002,
+        title: '选择结构',
+        auth: 'Private',
+        categoryName: 'C++基础',
+        progress: 0,
+        num: 22,
+        author: 'root',
+        gmtModified: '2024-01-03'
       }
     ]);
-
+    
+    const handleRowClick = (record: any, ev: Event) => {
+      const routePath = '/train/trainsection'; 
+      router.push(routePath);
+    };
+    
     return {
       columns,
-      data
+      data,
+      show,
+      handleRowClick,
     }
   },
 }
 </script>
 
 <template>
-  <a-table :columns="columns" :data="data">
-    <template #auth="{ record }">
-      <a-tag>{{ record.auth }}</a-tag>
+  <a-table :data="data" @row-click="handleRowClick">
+    <template #columns>
+      <a-table-column title="编号" data-index="id"></a-table-column>
+      <a-table-column title="题单" data-index="title"></a-table-column>
+      <a-table-column title="权限" data-index="auth">
+        <template #cell="{ record }">
+          <a-tag color="red">{{ record.auth }}</a-tag>
+        </template>
+      </a-table-column>
+      <a-table-column title="分类" data-index="categoryName">
+        <template #cell="{ record }">
+          <a-tag bordered color="green">{{ record.categoryName }}</a-tag>
+        </template>
+      </a-table-column>
+      <a-table-column title="进度" data-index="progress">
+        <template #cell="{ record }">
+          <a-progress :animation="true" :show-text="false">{{ record.progress }}</a-progress>
+        </template>
+      </a-table-column>
+      <a-table-column title="题目数" data-index="num"></a-table-column>
+      <a-table-column title="作者" data-index="author"></a-table-column>
+      <a-table-column title="最近更新" data-index="gmtModified"></a-table-column>
     </template>
   </a-table>
 </template>
