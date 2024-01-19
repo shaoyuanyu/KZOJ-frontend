@@ -1,3 +1,6 @@
+<script setup lang="ts">
+</script>
+
 <template>
   <div :style="{ display: 'flex', flexDirection: 'column', width: '100%' }">
     <a-card :style="{ width: '100%' }">
@@ -18,22 +21,19 @@
       </div>
       <div>
         <h3>训练分类</h3>
-        <a-button>高级数据结构</a-button>
-        <a-button>高级算法</a-button>
-        <a-button>高级数学及其他</a-button>
-        <a-button>图论算法</a-button>
-        <a-button>高级动态规划</a-button>
-        <a-button>CSP-J</a-button>
+        <a-space>
+          <a-button type="primary">全部</a-button>
+          <a-button>高级数据结构</a-button>
+          <a-button>高级算法</a-button>
+          <a-button>高级数学及其他</a-button>
+          <a-button>图论算法</a-button>
+          <a-button>高级动态规划</a-button>
+          <a-button>CSP-J</a-button>
+        </a-space>
       </div>
     </a-card>
   </div>
 </template>
-
-<script>
-export default {
-  name: 'SearchCard'
-}
-</script>
 
 <style scoped>
 .card {

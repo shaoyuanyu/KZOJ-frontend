@@ -81,7 +81,7 @@ export default {
     
     const handleRowClick = (record: any, ev: Event) => {
       const routePath = '/train/trainsection'; 
-      router.push(routePath);
+      router.push({ path: routePath, query: { id: record.id } });
     };
     
     return {
