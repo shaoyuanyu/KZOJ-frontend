@@ -1,3 +1,7 @@
+<script setup lang='ts'>
+
+</script>
+
 <template>
   <div class="container">
     <a-card hoverable class="card">

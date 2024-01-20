@@ -1,3 +1,9 @@
+<script setup lang='ts'>
+// 额外引入图标库
+import ArcoVueIcon from '@arco-design/web-vue/es/icon'
+import '@arco-design/web-vue/dist/arco.css'
+</script>
+
 <template>
   <div :style="{ display: 'flex' }">
     <a-card :style="{ width: '100%' }" title="全部比赛">
@@ -21,16 +27,6 @@
     </a-card>
   </div>
 </template>
-
-<script>
-// 额外引入图标库
-import ArcoVueIcon from '@arco-design/web-vue/es/icon'
-import '@arco-design/web-vue/dist/arco.css'
-
-export default {
-  jsx: true // 启用JSX语法扩展
-}
-</script>
 
 <style scoped>
 .card {
