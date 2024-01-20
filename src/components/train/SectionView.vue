@@ -28,8 +28,8 @@ const data = {
 const selectedKey = ref('0');
 
 // 在handleClick方法中更新selectedKey
-const handleClick = (e: { key: string }) => {
-  selectedKey.value = e.key;
+const handleClick = (key: string) => {
+  selectedKey.value = key;
 };
 
 // 使用toRefs将ref转换为可以在模板中直接访问的对象
@@ -44,7 +44,7 @@ const state = toRefs({ selectedKey });
   <div :style="{ display: 'flex' }">
     <a-card :style="{ width: '100%', marginTop: '5px' }">
       <div class="menu">
-        <a-menu mode="horizontal" :default-selected-keys="[state.selectedKey.value]" @menu-item-click="handleClick">
+        <a-menu mode="horizontal" :selected-keys="[state.selectedKey.value]" @menu-item-click="handleClick">
           <a-menu-item key="0"><icon-home />训练简介</a-menu-item>
           <a-menu-item key="1"><icon-list />题目列表</a-menu-item>
           <a-menu-item key="2"><icon-ordered-list />记录榜单</a-menu-item>

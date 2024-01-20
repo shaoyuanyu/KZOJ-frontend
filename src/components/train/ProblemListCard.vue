@@ -56,26 +56,26 @@ const handleRowClick = (record: any, ev: Event) => {
 <template>
   <a-table :data="data" @row-click="handleRowClick">
     <template #columns>
-      <a-table-column title="编号" data-index="id"></a-table-column>
-      <a-table-column title="题单" data-index="title"></a-table-column>
-      <a-table-column title="权限" data-index="auth">
+      <a-table-column title="编号" data-index="id" align="center"></a-table-column>
+      <a-table-column title="题单" data-index="title" align="center"></a-table-column>
+      <a-table-column title="权限" data-index="auth" align="center">
         <template #cell="{ record }">
           <a-tag color="red">{{ record.auth }}</a-tag>
         </template>
       </a-table-column>
-      <a-table-column title="分类" data-index="categoryName">
+      <a-table-column title="分类" data-index="categoryName" align="center">
         <template #cell="{ record }">
           <a-tag bordered color="green">{{ record.categoryName }}</a-tag>
         </template>
       </a-table-column>
-      <a-table-column title="进度" data-index="progress">
+      <a-table-column title="进度" data-index="progress" align="center">
         <template #cell="{ record }">
           <a-progress :animation="true" :show-text="false">{{ record.progress }}</a-progress>
         </template>
       </a-table-column>
-      <a-table-column title="题目数" data-index="num"></a-table-column>
-      <a-table-column title="作者" data-index="author"></a-table-column>
-      <a-table-column title="最近更新" data-index="gmtModified"></a-table-column>
+      <a-table-column title="题目数" data-index="num" align="center"></a-table-column>
+      <a-table-column title="作者" data-index="author" align="center"></a-table-column>
+      <a-table-column title="最近更新" data-index="gmtModified" align="center"></a-table-column>
     </template>
   </a-table>
 </template>

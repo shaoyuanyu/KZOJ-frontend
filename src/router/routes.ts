@@ -106,7 +106,7 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: '/train/trainsection',
-        meta: { title: '浏览题目' },
+        meta: { title: '浏览训练' },
         component: () => import('@/components/train/SectionView.vue'),
       },
       
