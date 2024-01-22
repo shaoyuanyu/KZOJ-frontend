@@ -5,6 +5,7 @@ import { defineComponent } from 'vue';
 import TrainSectionHead from '../train_section/TrainSectionHead.vue';
 import TrainSectionBrief from '../train_section/TrainSectionBrief.vue';
 import TrainSectionProblemList from '../train_section/TrainSectionProblemList.vue';
+import TrainSectionRank from '../train_section/TrainSectionRank.vue';
 
 const route = useRoute();
 const id = ref(route.query.id);
@@ -56,4 +57,5 @@ const state = toRefs({ selectedKey });
   <!-- 使用v-if和v-else-if指令动态显示不同的组件 -->
   <TrainSectionBrief v-if="state.selectedKey.value === '0'" :data="data" />
   <TrainSectionProblemList v-else-if="state.selectedKey.value === '1'" :data="data" />
+  <TrainSectionRank v-else-if="state.selectedKey.value === '2'" :data="data" />
 </template>
