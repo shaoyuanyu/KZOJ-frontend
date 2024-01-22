@@ -1,18 +1,51 @@
 <script setup lang='ts'>
-// 额外引入图标库
-import ArcoVueIcon from '@arco-design/web-vue/es/icon'
+import { ref } from 'vue';
+import ArcoVueIcon from '@arco-design/web-vue/es/icon';
 import '@arco-design/web-vue/dist/arco.css'
+import { useRouter } from 'vue-router';
+const router = useRouter();
+// 比赛需要的相关数据
+// id 主键
+// title 比赛标题
+// start_time	开始时间
+// duration	比赛时长（s）
+// visible	boolean		是否可见
+
+// 创建一个响应式引用来存储比赛数据
+// 需要从数据库获取
+const competitions = ref([
+  {
+    id: 1,
+    title: 'W-J(普及组)测试-3',
+    start_time: '2024-01-13 09:00:00',
+    duration: 3600,
+    visible: true
+  },
+  {
+    id: 2,
+    title: 'W-J(普及组)测试-2',
+    start_time: '2024-01-7 08:3-:00',
+    duration: 3600,
+    visible: true
+  }
+]);
+
+//TODO:跳转以及跳转界面
+const handleRowClick = (record: any, ev: Event) => {
+  const routePath = '/train/trainsection'; 
+  router.push({ path: routePath, query: { id: record.id } });
+};
 </script>
 
 <template>
   <div :style="{ display: 'flex' }">
     <a-card :style="{ width: '100%' }" title="全部比赛">
       <a-list>
-        <a-list-item v-for="idx in 4" :key="idx">
-          <a-list-item-meta title="周测">
-            <template #description>
-              <div><icon-calendar /> 2023-09-03 00:18:35 <icon-schedule /> 3小时</div>
-            </template>
+        <a-list-item v-for="competition in competitions" :key="competition.id" @click="handleRowClick">
+          <a-list-item-meta
+            :title="competition.title"
+            :description="'开始时间: ' + competition.start_time + '持续时间' + competition.duration"
+          >
             <template #avatar>
               <a-avatar shape="square">
                 <img
@@ -20,6 +53,14 @@ import '@arco-design/web-vue/dist/arco.css'
                   src="../../public/material/Competition.jpg"
                 />
               </a-avatar>
+            </template>
+            <template #description>
+              <div>
+                <icon-calendar />
+                开始时间: {{competition.start_time}}&nbsp;&nbsp;&nbsp;&nbsp; <!--这里用来添加宽度 可删除-->
+                <icon-schedule />
+                持续时间: {{competition.duration}}
+              </div>
             </template>
           </a-list-item-meta>
         </a-list-item>
@@ -29,16 +70,5 @@ import '@arco-design/web-vue/dist/arco.css'
 </template>
 
 <style scoped>
-.card {
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  padding: 20px;
-  background-color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-}
 
-.card:hover {
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-}
 </style>
