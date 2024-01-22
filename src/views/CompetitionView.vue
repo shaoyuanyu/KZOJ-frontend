@@ -41,7 +41,7 @@ const handleRowClick = (record: any, ev: Event) => {
   <div :style="{ display: 'flex' }">
     <a-card :style="{ width: '100%' }" title="全部比赛">
       <a-list>
-        <a-list-item v-for="competition in competitions" :key="competition.id" @click="handleRowClick">
+        <a-list-item v-for="competition in competitions" :key="competition.id" @click="handleRowClick" :style="{ cursor: 'pointer' }">
           <a-list-item-meta
             :title="competition.title"
             :description="'开始时间: ' + competition.start_time + '持续时间' + competition.duration"

@@ -51,7 +51,7 @@ const handleRowClick = (record: any, ev: Event) => {
 </script>
 
 <template>
-    <a-table :data="problemData" :style="{ marginTop: '5px' }" @row-click="handleRowClick">
+    <a-table :data="problemData" @row-click="handleRowClick" :style="{ marginTop: '5px', cursor: 'pointer' }">
       <template #columns>
         <a-table-column title="题目ID" data-index="problemID" align="center"></a-table-column>
         <a-table-column title="标题" data-index="title" align="center"></a-table-column>
