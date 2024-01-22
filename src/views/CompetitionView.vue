@@ -17,7 +17,7 @@ import '@arco-design/web-vue/dist/arco.css'
               <a-avatar shape="square">
                 <img
                   alt="avatar"
-                  src="material/Competition.jpg"
+                  src="../../public/material/Competition.jpg"
                 />
               </a-avatar>
             </template>
